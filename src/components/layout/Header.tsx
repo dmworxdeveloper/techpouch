@@ -9,7 +9,7 @@ import { SearchDialog } from "./SearchDialog";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Container } from "@/components/ui/Container";
-import { primaryProducts, productHref, secondaryProducts } from "@/lib/products";
+import { catalogCategories, dedicatedCategories } from "@/lib/catalog";
 import { mainNav, whatsappMessages, whatsappUrl } from "@/lib/site";
 
 /** Top-level links shown after the Products menu. */
@@ -77,11 +77,11 @@ export function Header() {
         scrolled || mobileOpen ? "border-line shadow-soft" : "border-line/70"
       }`}
     >
-      <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
+      <Container className="flex h-16 items-center justify-between gap-4 xl:h-[4.5rem]">
         <Logo onClick={closeAll} />
 
-        <nav aria-label="Main" className="hidden h-full lg:block">
-          <ul className="flex h-full items-center gap-2">
+        <nav aria-label="Main" className="hidden h-full xl:block">
+          <ul className="flex h-full items-center gap-1">
             <li className="h-full">
               <Link href="/" className={desktopLink(isActive("/"))} aria-current={pathname === "/" ? "page" : undefined}>
                 Home
@@ -95,7 +95,7 @@ export function Header() {
             >
               <button
                 type="button"
-                className={desktopLink(pathname.startsWith("/products"))}
+                className={desktopLink(pathname.startsWith("/products") || dedicatedCategories.some((c) => pathname.startsWith(c.href)))}
                 aria-expanded={productsOpen}
                 aria-controls={productsMenuId}
                 onClick={() => setProductsOpen((v) => !v)}
@@ -114,15 +114,15 @@ export function Header() {
               >
                 <div className="rounded-2xl border border-line bg-white p-2 shadow-lift">
                   <ul>
-                    {primaryProducts.map((p) => (
-                      <li key={p.slug}>
+                    {catalogCategories.map((c) => (
+                      <li key={c.id}>
                         <Link
-                          href={productHref(p.slug)}
+                          href={c.href}
                           onClick={closeAll}
                           className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-brand-500"
                         >
-                          <span className="block text-sm font-semibold text-ink-900">{p.name}</span>
-                          <span className="mt-0.5 line-clamp-1 block text-xs text-ink-500">{p.summary}</span>
+                          <span className="block text-sm font-semibold text-ink-900">{c.name}</span>
+                          <span className="mt-0.5 line-clamp-1 block text-xs text-ink-500">{c.summary}</span>
                         </Link>
                       </li>
                     ))}
@@ -132,14 +132,14 @@ export function Header() {
                     Repair accessories
                   </p>
                   <ul>
-                    {secondaryProducts.map((p) => (
-                      <li key={p.slug}>
+                    {dedicatedCategories.map((c) => (
+                      <li key={c.id}>
                         <Link
-                          href={productHref(p.slug)}
+                          href={c.href}
                           onClick={closeAll}
                           className="block rounded-xl px-3 py-2 text-sm text-ink-700 transition-colors hover:bg-surface hover:text-ink-900 focus-visible:outline-2 focus-visible:outline-brand-500"
                         >
-                          {p.name}
+                          {c.name}
                         </Link>
                       </li>
                     ))}
@@ -182,7 +182,7 @@ export function Header() {
           </ButtonLink>
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-xl text-ink-900 transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-brand-500 lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-xl text-ink-900 transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-brand-500 xl:hidden"
             aria-expanded={mobileOpen}
             aria-controls={mobileMenuId}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -196,7 +196,7 @@ export function Header() {
       <div
         id={mobileMenuId}
         hidden={!mobileOpen}
-        className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-white lg:hidden"
+        className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-white xl:hidden"
       >
         <Container className="py-4">
           <nav aria-label="Mobile">
@@ -211,14 +211,14 @@ export function Header() {
                   Products
                 </Link>
                 <ul className="ml-3 border-l border-line pl-3">
-                  {[...primaryProducts, ...secondaryProducts].map((p) => (
-                    <li key={p.slug}>
+                  {[...catalogCategories, ...dedicatedCategories].map((c) => (
+                    <li key={c.id}>
                       <Link
-                        href={productHref(p.slug)}
+                        href={c.href}
                         onClick={closeAll}
-                        className={`${mobileLink(pathname === productHref(p.slug))} text-sm`}
+                        className={`${mobileLink(pathname.startsWith(c.href))} text-sm`}
                       >
-                        {p.name}
+                        {c.name}
                       </Link>
                     </li>
                   ))}

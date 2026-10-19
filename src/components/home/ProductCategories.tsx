@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { CategoryCard, ProductCard } from "@/components/products/ProductCard";
+import { CategoryCard, CategoryTile } from "@/components/products/ProductCard";
 import { CustomManufacturingArt } from "@/components/products/CustomManufacturingArt";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { products } from "@/lib/products";
+import { publishedCategories } from "@/lib/catalog";
 
 export function ProductCategories() {
   return (
@@ -28,8 +28,13 @@ export function ProductCategories() {
         </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {products.map((product, i) => (
-            <ProductCard key={product.slug} product={product} delay={i * 70} />
+          {publishedCategories.map((category, i) => (
+            <CategoryTile
+              key={category.id}
+              category={category}
+              delay={i * 70}
+              imageSizes="(min-width: 1280px) 240px, (min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw"
+            />
           ))}
           <CategoryCard
             title="Custom Manufacturing"
@@ -37,7 +42,7 @@ export function ProductCategories() {
             description="Bring your own product ideas to life with our custom manufacturing services."
             cta="Learn More"
             media={<CustomManufacturingArt />}
-            delay={products.length * 70}
+            delay={publishedCategories.length * 70}
           />
         </div>
 

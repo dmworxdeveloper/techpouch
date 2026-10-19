@@ -3,23 +3,27 @@
 import Link from "next/link";
 import { useId, useMemo, useRef, useState } from "react";
 import { ArrowRight, Search, X } from "lucide-react";
-import { products, productHref } from "@/lib/products";
+import { productHref, publishedCategories, publishedProducts } from "@/lib/catalog";
 
 type Entry = { title: string; description: string; href: string };
 
 /** Everything the site search can find: product pages plus the main pages. */
 const entries: Entry[] = [
-  ...products.map((p) => ({ title: p.name, description: p.summary, href: productHref(p.slug) })),
+  ...publishedCategories.map((c) => ({ title: c.name, description: c.summary, href: c.href })),
+  ...publishedProducts.map((p) => ({ title: p.name, description: p.shortDescription, href: productHref(p) })),
   { title: "All Products", description: "Tablet covers, mouse pads and repair accessories.", href: "/products" },
   {
     title: "Custom Manufacturing",
     description: "Share your product idea, specifications and reference images.",
     href: "/custom-manufacturing",
   },
-  { title: "Wholesale Orders", description: "Bulk orders and reseller inquiries.", href: "/#wholesale" },
+  { title: "Wholesale", description: "Bulk orders, reseller and distributor inquiries.", href: "/wholesale" },
   { title: "How to Order", description: "Ordering steps for retail and wholesale customers.", href: "/#how-to-order" },
   { title: "About Us", description: "Who Tech Pouch is and who we work with.", href: "/about" },
   { title: "Contact Us", description: "WhatsApp, phone, email and inquiry form.", href: "/contact" },
+  { title: "FAQ", description: "Sizes, ordering, pricing, delivery and Cash on Delivery questions.", href: "/faq" },
+  { title: "Privacy Policy", description: "How we handle the information you share with us.", href: "/privacy-policy" },
+  { title: "Terms & Conditions", description: "Terms for inquiries, orders and custom requests.", href: "/terms" },
 ];
 
 function matches(entry: Entry, query: string) {

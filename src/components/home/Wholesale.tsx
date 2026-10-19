@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Boxes, Building2, FileText, Lightbulb, PackageSearch, Store } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { getProduct } from "@/lib/products";
+import { publishedProducts } from "@/lib/catalog";
 import { whatsappMessages, whatsappUrl } from "@/lib/site";
 
 const inquiryTypes = [
@@ -19,12 +20,13 @@ const inquiryTypes = [
  * Photo collage for the B2B section. Swap these for a workshop or production photo
  * once one is available (keep it a real Tech Pouch photo, not stock imagery).
  */
+const imageOf = (productId: string, index: number) => publishedProducts.find((p) => p.id === productId)?.images[index];
 const collage = [
-  getProduct("universal-tablet-covers")!.gallery[1],
-  getProduct("zipper-tablet-covers")!.image,
-  getProduct("mouse-pads")!.gallery[0],
-  getProduct("zipper-tablet-covers")!.gallery[0],
-];
+  imageOf("universal-tablet-cover", 1),
+  imageOf("zipper-tablet-cover", 0),
+  imageOf("mouse-pad", 1),
+  imageOf("zipper-tablet-cover", 1),
+].filter((image) => image !== undefined);
 
 export function Wholesale() {
   return (
@@ -58,7 +60,10 @@ export function Wholesale() {
             </ButtonLink>
           </div>
           <p className="reveal mt-4 text-xs text-ink-500">
-            Prices are not listed publicly — quantities, specifications and pricing are discussed directly with you.
+            Prices are not listed publicly — quantities, specifications and pricing are discussed directly with you.{" "}
+            <Link href="/wholesale" className="font-semibold text-brand-600 hover:underline">
+              Learn how wholesale works →
+            </Link>
           </p>
         </div>
 

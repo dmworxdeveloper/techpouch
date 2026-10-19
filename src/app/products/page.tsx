@@ -1,71 +1,138 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Headphones } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { CtaBand } from "@/components/layout/CtaBand";
-import { ProductCard } from "@/components/products/ProductCard";
-import { ProductImage } from "@/components/products/ProductImage";
+import { CategoryTile, ProductGrid } from "@/components/products/ProductCard";
 import { Container } from "@/components/ui/Container";
-import { primaryProducts, productHref, secondaryProducts } from "@/lib/products";
+import { EmptyState } from "@/components/ui/StatusMessage";
+import { ButtonLink } from "@/components/ui/Button";
+import { catalogCategories, dedicatedCategories, getProductsInCategory } from "@/lib/catalog";
+import { pageMetadata } from "@/lib/seo";
 import { whatsappMessages } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Products — Tablet Covers & Mouse Pads",
   description:
-    "Browse Tech Pouch zipper tablet covers, universal tablet covers in 7, 8 and 10-inch sizes, and mouse pads. Available for single-piece orders and wholesale supply.",
-  alternates: { canonical: "/products" },
-};
+    "Browse Tech Pouch zipper tablet covers, universal tablet covers in 7, 8 and 10-inch sizes, and mouse pads. Order single pieces or request wholesale quotes.",
+  path: "/products",
+});
 
 export default function ProductsPage() {
+  const sections = catalogCategories.map((category) => ({ category, items: getProductsInCategory(category.id) }));
+
   return (
     <>
       <PageHeader
         crumbs={[{ label: "Products", href: "/products" }]}
-        title="Tablet Covers, Mouse Pads & Tech Accessories"
-        lead="Explore our range of practical tech accessories for individual use, retail sales, and wholesale supply. Prices are shared on request so we can match your quantity and requirements."
+        eyebrow="Our products"
+        title="Tech Accessories Made for Retail and Wholesale"
+        lead="Explore our tablet covers, mouse pads and more. Order a single piece via WhatsApp or request a wholesale quote — prices are shared on request."
       />
 
-      <section aria-labelledby="main-range" className="py-16 sm:py-20">
+      <section aria-labelledby="categories-heading" className="py-14 sm:py-16">
         <Container>
-          <h2 id="main-range" className="text-2xl font-semibold tracking-tight text-ink-900">
-            Main product range
+          <h2 id="categories-heading" className="text-2xl font-semibold tracking-tight text-ink-900">
+            Shop by category
           </h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {primaryProducts.map((product, i) => (
-              <ProductCard key={product.slug} product={product} delay={i * 90} />
+          <nav aria-label="Product categories" className="mt-4 flex flex-wrap gap-2">
+            {sections.map(({ category }) => (
+              <a
+                key={category.id}
+                href={`#${category.slug}`}
+                className="rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-700 transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700"
+              >
+                {category.name}
+              </a>
+            ))}
+            {dedicatedCategories.map((category) => (
+              <Link
+                key={category.id}
+                href={category.href}
+                className="rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-700 transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700"
+              >
+                {category.name}
+              </Link>
+            ))}
+          </nav>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {catalogCategories.map((category, i) => (
+              <CategoryTile key={category.id} category={category} delay={i * 80} />
             ))}
           </div>
         </Container>
       </section>
 
-      <section aria-labelledby="repair-range" className="bg-surface py-16 sm:py-20">
-        <Container>
-          <h2 id="repair-range" className="text-2xl font-semibold tracking-tight text-ink-900">
-            Repair accessories
-          </h2>
-          {secondaryProducts.map((p) => (
-            <Link
-              key={p.slug}
-              href={productHref(p.slug)}
-              className="reveal group mt-8 grid items-center gap-6 overflow-hidden rounded-2xl border border-line bg-white transition hover:border-brand-200 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-brand-500 sm:grid-cols-[220px_1fr]"
-            >
-              <ProductImage image={p.image} sizes="220px" className="sm:h-full" />
-              <div className="p-6 sm:pl-0">
-                <h3 className="text-xl font-semibold text-ink-900">{p.name}</h3>
-                <p className="mt-2 text-ink-600">{p.summary}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600">
-                  {p.cta}
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                </span>
+      {sections.map(({ category, items }, i) => (
+        <section
+          key={category.id}
+          id={category.slug}
+          aria-labelledby={`${category.slug}-heading`}
+          className={`scroll-mt-24 py-14 sm:py-16 ${i % 2 === 0 ? "bg-tint" : ""}`}
+        >
+          <Container>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div className="max-w-2xl">
+                <h2 id={`${category.slug}-heading`} className="text-2xl font-semibold tracking-tight text-ink-900">
+                  {category.name}
+                </h2>
+                <p className="mt-2 text-ink-600">{category.summary}</p>
               </div>
+              <Link
+                href={category.href}
+                className="group inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-700"
+              >
+                View category
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="mt-8">
+              {items.length > 0 ? (
+                <ProductGrid products={items} headingLevel="h3" />
+              ) : (
+                <EmptyState title="New products coming soon">
+                  Ask our team about current availability in this category.
+                </EmptyState>
+              )}
+            </div>
+          </Container>
+        </section>
+      ))}
+
+      {dedicatedCategories.map((category) => (
+        <section key={category.id} aria-label={category.name} className="py-14 sm:py-16">
+          <Container>
+            <Link
+              href={category.href}
+              className="group flex flex-col items-start gap-4 rounded-2xl border border-line bg-white p-6 shadow-soft transition hover:border-brand-200 hover:shadow-lift sm:flex-row sm:items-center"
+            >
+              <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                <Headphones className="size-6" aria-hidden="true" />
+              </span>
+              <span className="flex-1">
+                <span className="block font-semibold text-ink-900">Looking for {category.name.toLowerCase()}?</span>
+                <span className="text-sm text-ink-600">{category.summary} These have their own dedicated page.</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600">
+                {category.cardCta}
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </span>
             </Link>
-          ))}
+          </Container>
+        </section>
+      ))}
+
+      <section className="pb-4">
+        <Container className="text-center">
+          <ButtonLink href="/wholesale" variant="outline">
+            Buying in bulk? Visit the wholesale page
+          </ButtonLink>
         </Container>
       </section>
 
       <CtaBand
         title="Need something that isn't listed?"
-        text="Tell us what you are looking for — we can discuss sourcing or manufacturing it to your requirements."
+        text="Tell us what you are looking for — we can discuss sourcing it or manufacturing it to your requirements."
         message={whatsappMessages.custom}
         secondary={{ label: "Custom Manufacturing", href: "/custom-manufacturing" }}
       />

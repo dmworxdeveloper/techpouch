@@ -38,7 +38,50 @@ export const whatsappMessages = {
     "Hello Tech Pouch, I would like to request a manufacturing quote. Here are my requirements:",
   custom: "Hello Tech Pouch, I would like to discuss a custom manufacturing project.",
   retail: "Hello Tech Pouch, I would like to ask about product availability for a retail order.",
+  headphoneRepair:
+    "Hello Tech Pouch, I would like to inquire about headphone leather repair accessories. My headphone model is:",
 } as const;
+
+/** "Ask About This Product" message, including the product page link when available. */
+export function productInquiryMessage(productName: string, url?: string): string {
+  return [`Hello Tech Pouch, I would like to ask about ${productName}.`, url && `Product link: ${url}`]
+    .filter(Boolean)
+    .join("\n");
+}
+
+/** Wholesale quote request for a specific product. */
+export function productQuoteMessage(productName: string, url?: string): string {
+  return [
+    `Hello Tech Pouch, I would like a wholesale quote for ${productName}.`,
+    url && `Product link: ${url}`,
+    "Estimated quantity: ",
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+/** Retail order message used by "Order via WhatsApp". */
+export function orderMessage({
+  productName,
+  url,
+  quantity,
+  option,
+}: {
+  productName: string;
+  url?: string;
+  quantity: number;
+  option?: string;
+}): string {
+  return [
+    `Hello Tech Pouch, I would like to order ${productName}.`,
+    `Quantity: ${quantity}.`,
+    option && `Selected option: ${option}.`,
+    url && `Product link: ${url}`,
+    "Please confirm availability, total price, delivery charges, and Cash on Delivery availability.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
 
 /** Builds a wa.me link with an optional URL-encoded prefilled message. */
 export function whatsappUrl(message?: string): string {
@@ -73,6 +116,7 @@ export type NavLink = { label: string; href: string };
 export const mainNav: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Custom Manufacturing", href: "/custom-manufacturing" },
+  { label: "Wholesale", href: "/wholesale" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];

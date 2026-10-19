@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { ProductImage } from "./ProductImage";
-import { productHref, type Product } from "@/lib/products";
+import { getCategorySizes, productHref, type Category, type Product } from "@/lib/catalog";
 import { revealDelay } from "@/lib/reveal";
 
 type CategoryCardProps = {
@@ -16,7 +16,7 @@ type CategoryCardProps = {
   delay?: number;
 };
 
-/** Card shell shared by product categories and the custom manufacturing card. */
+/** Card shell shared by categories, products and the custom manufacturing card. */
 export function CategoryCard({
   title,
   href,
@@ -35,7 +35,7 @@ export function CategoryCard({
         <div className="flex flex-1 flex-col px-2 pt-4 pb-2">
           <Heading className="text-base font-semibold text-ink-900">{title}</Heading>
           <p className="mt-2 text-sm leading-relaxed text-ink-600">{description}</p>
-          {sizes && (
+          {sizes && sizes.length > 0 && (
             <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={`${title} size options`}>
               {sizes.map((size) => (
                 <li
@@ -63,6 +63,33 @@ export function CategoryCard({
   );
 }
 
+const cardImageSizes = "(min-width: 1280px) 300px, (min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw";
+
+export function CategoryTile({
+  category,
+  headingLevel,
+  delay,
+  imageSizes = cardImageSizes,
+}: {
+  category: Category;
+  headingLevel?: "h2" | "h3";
+  delay?: number;
+  imageSizes?: string;
+}) {
+  return (
+    <CategoryCard
+      title={category.name}
+      href={category.href}
+      description={category.summary}
+      cta={category.cardCta}
+      sizes={getCategorySizes(category.id)}
+      headingLevel={headingLevel}
+      delay={delay}
+      media={<ProductImage image={category.image} sizes={imageSizes} aspect="aspect-[4/3]" />}
+    />
+  );
+}
+
 export function ProductCard({
   product,
   headingLevel,
@@ -75,19 +102,24 @@ export function ProductCard({
   return (
     <CategoryCard
       title={product.name}
-      href={productHref(product.slug)}
-      description={product.summary}
-      cta={product.cta}
+      href={productHref(product)}
+      description={product.shortDescription}
+      cta="View Product"
       sizes={product.sizes}
       headingLevel={headingLevel}
       delay={delay}
-      media={
-        <ProductImage
-          image={product.image}
-          sizes="(min-width: 1280px) 240px, (min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw"
-          aspect="aspect-[4/3]"
-        />
-      }
+      media={<ProductImage image={product.images[0]} sizes={cardImageSizes} aspect="aspect-[4/3]" />}
     />
+  );
+}
+
+/** Responsive grid that adapts to any number of products. */
+export function ProductGrid({ products, headingLevel }: { products: Product[]; headingLevel?: "h2" | "h3" }) {
+  return (
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {products.map((product, i) => (
+        <ProductCard key={product.id} product={product} headingLevel={headingLevel} delay={(i % 4) * 70} />
+      ))}
+    </div>
   );
 }

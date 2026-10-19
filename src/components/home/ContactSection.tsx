@@ -1,5 +1,5 @@
 import { ContactDetails } from "@/components/contact/ContactDetails";
-import { ContactForm } from "@/components/contact/ContactForm";
+import { InquiryForm } from "@/components/forms/InquiryForm";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -20,7 +20,7 @@ export function ContactSection() {
         </div>
         <div className="reveal rounded-2xl border border-line bg-white p-5 shadow-soft sm:p-7 lg:col-span-7">
           <h3 className="sr-only">Send an inquiry</h3>
-          <ContactForm />
+          <InquiryForm formId="contact" />
         </div>
       </Container>
     </section>

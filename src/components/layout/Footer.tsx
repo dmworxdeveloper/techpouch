@@ -6,10 +6,20 @@ import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { FacebookIcon, InstagramIcon, YouTubeIcon } from "@/components/icons/SocialIcons";
-import { products, productHref } from "@/lib/products";
+import { publishedCategories } from "@/lib/catalog";
 import { mainNav, siteConfig, socialLinks, whatsappMessages, whatsappUrl } from "@/lib/site";
 
-const quickLinks = [...mainNav.slice(0, 1), { label: "All Products", href: "/products" }, ...mainNav.slice(1)];
+const quickLinks = [
+  ...mainNav.slice(0, 1),
+  { label: "All Products", href: "/products" },
+  ...mainNav.slice(1),
+  { label: "FAQ", href: "/faq" },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms & Conditions", href: "/terms" },
+];
 
 /** Only profiles with a configured URL are shown (see socialLinks in src/lib/site.ts). */
 const socials = [
@@ -51,10 +61,10 @@ export function Footer() {
           <nav aria-label="Product categories" className="lg:col-span-3">
             <h3 className="text-sm font-semibold">Products</h3>
             <ul className="mt-3">
-              {products.map((p) => (
-                <li key={p.slug}>
-                  <Link href={productHref(p.slug)} className={linkClass}>
-                    {p.name}
+              {publishedCategories.map((c) => (
+                <li key={c.id}>
+                  <Link href={c.href} className={linkClass}>
+                    {c.name}
                   </Link>
                 </li>
               ))}
@@ -109,10 +119,19 @@ export function Footer() {
 
       {/* Extra bottom padding keeps the floating WhatsApp button clear of the text on small screens. */}
       <div className="border-t border-white/10 bg-black/15">
-        <Container className="pt-5 pb-20 text-sm text-white/60 sm:pb-5">
+        <Container className="flex flex-col gap-3 pt-5 pb-20 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between sm:pb-5">
           <p>
             © <CopyrightYear /> {siteConfig.name}. All rights reserved.
           </p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-1">
+            {legalLinks.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="transition-colors hover:text-white">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </Container>
       </div>
     </footer>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { ProductImage as ProductImageData } from "@/lib/products";
+import type { CatalogImage as ProductImageData } from "@/lib/catalog";
 
 type ProductImageProps = {
   image: ProductImageData;

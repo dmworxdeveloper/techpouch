@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/layout/FloatingWhatsApp";
 import { RevealObserver } from "@/components/ui/RevealObserver";
+import { Analytics } from "@/components/seo/Analytics";
 import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
@@ -51,6 +52,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
   },
   robots: { index: true, follow: true },
+  // Google Search Console: set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to the token from the HTML-tag method.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
   formatDetection: { telephone: false },
 };
 
@@ -75,8 +80,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
-        <FloatingWhatsApp />
+        <FloatingWhatsApp siteUrl={siteConfig.url} />
         <RevealObserver />
+        <Analytics />
       </body>
     </html>
   );
