@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Deep navy / charcoal text scale */
+  --color-ink-950: #0a1426;
+  --color-ink-900: #0f1d35;
+  --color-ink-800: #1c2b45;
+  --color-ink-700: #33415a;
+  --color-ink-600: #4b5871;
+  --color-ink-500: #67738a;
+
+  /* Electric blue accent */
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe7ff;
+  --color-brand-200: #bdd3ff;
+  --color-brand-500: #2f6bff;
+  --color-brand-600: #1f55f0;
+  --color-brand-700: #1843c4;
+
+  --color-surface: #f6f8fb;
+  --color-line: #e3e8f0;
+
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1da851;
+
+  --shadow-soft: 0 1px 2px rgb(15 29 53 / 0.04), 0 8px 24px -12px rgb(15 29 53 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(15 29 53 / 0.05), 0 18px 40px -16px rgb(15 29 53 / 0.22);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-float: float 7s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keep in-page anchors clear of the sticky header */
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink-900);
+}
+
+/* Scroll-reveal: content is visible by default; hidden only when JS has enabled reveals. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    /* Colour/shadow transitions are kept so hover states on revealed elements stay smooth. */
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      color 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .reveal-ready .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
