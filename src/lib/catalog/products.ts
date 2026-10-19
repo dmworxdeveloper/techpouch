@@ -44,8 +44,16 @@ export const products: Product[] = [
     pricing: { amount: 1400, currency: "PKR", delivery: { kind: "included-in-city", city: "Lahore" } },
     orderMessage:
       "Hello Tech Pouch, I want to order a zipper tablet cover for {price}. I am located in {city}. Please confirm my order and delivery details.",
-    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
-    images: [],
+    images: [
+      productImage("zipper-tablet-covers", "zipper-tablet-cover-black", "Black zipper tablet cover sleeve with a metal zip pull", { width: 1024, height: 1024 }),
+      productImage("zipper-tablet-covers", "zipper-tablet-covers-colours", "Pink zipper tablet cover with smaller views of teal, black and pink covers", { width: 500, height: 500 }),
+      productImage("zipper-tablet-covers", "zipper-tablet-cover-teal", "Teal zipper tablet cover standing upright", { width: 425, height: 707 }),
+      productImage("zipper-tablet-covers", "zipper-tablet-cover-pink", "Light pink zipper tablet cover sleeve", { width: 1024, height: 1024 }),
+      productImage("zipper-tablet-covers", "zipper-tablet-cover-hot-pink", "Hot pink zipper tablet cover sleeve", { width: 800, height: 800 }),
+      productImage("zipper-tablet-covers", "zipper-tablet-cover-white", "White zipper tablet cover sleeve", { width: 1024, height: 1024 }),
+      productImage("zipper-tablet-covers", "zipper-tablet-cover-printed", "White zipper tablet cover with a printed cartoon animal design", { width: 1024, height: 1024 }),
+      productImage("zipper-tablet-covers", "zipper-tablet-covers-four-colours", "Four zipper tablet covers in pink, black, teal and hot pink", { width: 320, height: 320 }),
+    ],
     features: [
       "Zipper-style closure",
       "Designed for everyday storage and portability",
@@ -74,8 +82,12 @@ export const products: Product[] = [
       "A universal tablet cover available in 7-inch, 8-inch and 10-inch options, so you can choose the size that matches your tablet.",
       "Not sure which size fits? Share your tablet model or its measurements and our team will confirm the right option before you order.",
     ],
-    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
-    images: [],
+    images: [
+      productImage("universal-tablet-covers", "universal-tablet-cover-red", "Red universal tablet cover with a rotating clasp, standing upright", { width: 1200, height: 1200 }),
+      productImage("universal-tablet-covers", "universal-tablet-cover-stand-views", "Red universal tablet cover shown closed, open and as a tablet stand", { width: 1024, height: 1024 }),
+      productImage("universal-tablet-covers", "universal-tablet-cover-blue", "Blue universal tablet cover shown from several angles with a tablet inside", { width: 1200, height: 1200 }),
+      productImage("universal-tablet-covers", "universal-tablet-covers-colours", "Universal tablet covers in white, black, purple, red and teal, shown with tablets", { width: 800, height: 800 }),
+    ],
     sizes: ["7-inch", "8-inch", "10-inch"],
     pricing: { amount: 1200, currency: "PKR", delivery: { kind: "included-in-city", city: "Lahore" } },
     orderMessage:
@@ -110,8 +122,12 @@ export const products: Product[] = [
     pricing: { amount: 250, currency: "PKR", delivery: { kind: "extra" } },
     orderMessage:
       "Hello Tech Pouch, I want to order a wrist-rest mouse pad for {price}. Please confirm delivery charges and the total payable amount.",
-    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
-    images: [],
+    images: [
+      productImage("mouse-pads", "wrist-rest-mouse-pads-assorted", "Four wrist-rest mouse pads in black, pink, blue and orange", { width: 1000, height: 1000 }),
+      productImage("mouse-pads", "wrist-rest-mouse-pad-teal", "Teal mouse pad with a built-in wrist rest", { width: 1200, height: 1200 }),
+      productImage("mouse-pads", "wrist-rest-mouse-pad-black", "Black wrist-rest mouse pad with a white mouse", { width: 960, height: 700 }),
+      productImage("mouse-pads", "wrist-rest-mouse-pads-stack", "Stack of wrist-rest mouse pads in blue, purple, teal, red and black", { width: 320, height: 320 }),
+    ],
     features: ["Built-in wrist rest", "Ask about available designs", "Single pieces and wholesale quantities"],
     specifications: [
       { label: "Type", value: "Mouse pad with wrist rest" },
@@ -137,8 +153,11 @@ export const products: Product[] = [
     pricing: { amount: 250, currency: "PKR", delivery: { kind: "extra" } },
     orderMessage:
       "Hello Tech Pouch, I want to order a plain mouse pad for {price}. Please confirm delivery charges and the total payable amount.",
-    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
-    images: [],
+    images: [
+      productImage("mouse-pads", "plain-mouse-pad-black", "Plain black rectangular mouse pad", { width: 1000, height: 1000 }),
+      productImage("mouse-pads", "plain-mouse-pad-zebra-print", "Flat mouse pad with a red zebra-stripe print and a white mouse", { width: 736, height: 736 }),
+      productImage("mouse-pads", "plain-mouse-pads-printed", "Flat mouse pads with printed designs in several colours", { width: 800, height: 800 }),
+    ],
     features: ["Flat design without wrist support", "Ask about available designs", "Single pieces and wholesale quantities"],
     specifications: [
       { label: "Type", value: "Flat mouse pad" },
@@ -162,8 +181,12 @@ export const products: Product[] = [
       "Leather replacement ear pads for restoring worn headphone cushions.",
       "Ear pads come in different shapes and sizes, so please share your headphone brand and model when you inquire. Our team will confirm whether a suitable replacement is available.",
     ],
-    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
-    images: [],
+    images: [
+      productImage("headphone-leather-repair", "headphone-ear-pads-leather", "Pair of round black leather headphone ear pads", { width: 960, height: 960 }),
+      productImage("headphone-leather-repair", "headphone-ear-pads-oval", "Pair of oval black leather headphone ear pads", { width: 1040, height: 736 }),
+      productImage("headphone-leather-repair", "headphone-ear-pads-round", "Pair of round black padded headphone ear pads", { width: 320, height: 320 }),
+      productImage("headphone-leather-repair", "headphone-ear-pads-colours", "Headphone ear pads in black and olive green", { width: 900, height: 1200 }),
+    ],
     features: [
       "Leather replacement ear pads",
       "Suitability confirmed for your headphone model",

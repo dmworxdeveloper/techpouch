@@ -89,9 +89,11 @@ Only add sizes, variants, specifications and compatibility details that Tech Pou
 
 ## Product galleries and images
 
-Every product page has a **Product Gallery** (`src/components/products/ProductGallery.tsx`). Galleries are
-currently empty on purpose: until photos are added, each shows a clean "Product photos coming soon" frame
-with no thumbnail row, and product cards show a matching small frame.
+Every product page has a **Product Gallery** (`src/components/products/ProductGallery.tsx`): a main image
+with clickable thumbnails. A product with no images shows a clean "Product photos coming soon" frame instead
+(no thumbnail row), and a product with one image shows just the main image.
+
+Product photos are stored per category in `public/images/products/<category>/`.
 
 To add photos to a product:
 

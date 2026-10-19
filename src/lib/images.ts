@@ -19,14 +19,11 @@ export const heroImages = {
   earPads: cutout("ear-pads-black", 1000, 697),
 };
 
-/**
- * Photos in the homepage B2B section collage. Kept separate from product galleries so the
- * approved homepage is unaffected while product galleries are empty.
- */
+/** Photos in the homepage B2B section collage (independent of the product galleries). */
 export const b2bCollageImages = [
   { src: "/images/products/universal-tablet-covers/universal-tablet-cover-stand-views.webp", alt: "Red universal tablet cover shown closed, open and as a tablet stand" },
   { src: "/images/products/zipper-tablet-covers/zipper-tablet-cover-black.webp", alt: "Black zipper tablet cover sleeve with a metal zip pull" },
-  { src: "/images/products/mouse-pads/wrist-rest-mouse-pad-rainbow-splash.webp", alt: "Sample illustration: wrist-rest mouse pad with a rainbow paint-splash design" },
+  { src: "/images/products/mouse-pads/wrist-rest-mouse-pad-teal.webp", alt: "Teal mouse pad with a built-in wrist rest" },
   { src: "/images/products/zipper-tablet-covers/zipper-tablet-cover-pink.webp", alt: "Pink zipper tablet cover sleeve shown upright" },
 ];
 
