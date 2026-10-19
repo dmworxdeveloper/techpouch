@@ -95,10 +95,10 @@ export const categories: Category[] = [
       "Tech Pouch supplies selected leather repair and replacement accessories for headphones. Share your headphone model and the part you need, and our team will confirm what is available.",
     cardCta: "View Accessories",
     image: {
-      src: "/images/products/headphone-leather-repair/headphone-ear-pads-leather.webp",
-      alt: "Pair of round black leather headphone ear pads",
-      width: 960,
-      height: 960,
+      src: "/images/products/headphone-leather-repair/headphone-ear-pads-oval.webp",
+      alt: "Pair of oval black leather headphone ear pads",
+      width: 1040,
+      height: 736,
     },
     status: "published",
     notice:
