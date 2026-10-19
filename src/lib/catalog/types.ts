@@ -9,7 +9,19 @@ export type CatalogImage = {
   alt: string;
   width: number;
   height: number;
+  /** Design/colour name shown to the customer and included in WhatsApp orders. Only for confirmed designs. */
+  design?: string;
 };
+
+/**
+ * Delivery rule for a single-piece retail price.
+ * - "included-in-city": delivery is included for one city and extra (confirmed with the customer) elsewhere.
+ * - "extra": delivery charges are always extra, including in that city.
+ */
+export type DeliveryRule = { kind: "included-in-city"; city: string } | { kind: "extra" };
+
+/** Confirmed single-piece retail price. Products without one are inquiry-only. */
+export type RetailPrice = { amount: number; currency: "PKR"; delivery: DeliveryRule };
 
 export type PublicationStatus = "published" | "draft";
 
@@ -39,6 +51,12 @@ export type Category = {
   status: PublicationStatus;
   /** Shown as an information note on the category page while details are being confirmed. */
   notice?: string;
+  /**
+   * "grid" lists product cards linking to individual product pages.
+   * "sections" shows every product in full (gallery, price, ordering) on the category page itself,
+   * without separate product URLs.
+   */
+  display?: "grid" | "sections";
   /** IDs from src/lib/faqs.ts shown on the category page. */
   faqIds?: string[];
   inquiryMessage: string;
@@ -58,6 +76,15 @@ export type Product = {
   images: CatalogImage[];
   sizes?: string[];
   variants?: VariantGroup[];
+  /** Confirmed single-piece retail price. Omit for inquiry-only products. */
+  pricing?: RetailPrice;
+  /**
+   * WhatsApp order message. Placeholders: {price}, {size}, {city}. Product, design, quantity and
+   * page link are appended automatically.
+   */
+  orderMessage?: string;
+  /** Small caption under the gallery, e.g. to flag temporary images. */
+  imageNote?: string;
   features: string[];
   specifications: Specification[];
   /** IDs from src/lib/faqs.ts shown on the product page. */

@@ -27,7 +27,7 @@ export default function ProductsPage() {
         crumbs={[{ label: "Products", href: "/products" }]}
         eyebrow="Our products"
         title="Tech Accessories Made for Retail and Wholesale"
-        lead="Explore our tablet covers, mouse pads and more. Order a single piece via WhatsApp or request a wholesale quote — prices are shared on request."
+        lead="Explore our tablet covers, mouse pads and more. Order a single piece via WhatsApp at the listed price, or request a wholesale quote for bulk quantities."
       />
 
       <section aria-labelledby="categories-heading" className="py-14 sm:py-16">

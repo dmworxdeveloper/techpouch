@@ -24,7 +24,7 @@ Copy `.env.example` to `.env.local` (or set the variables in your hosting dashbo
 | `/` | Homepage |
 | `/products` | All catalog categories and products |
 | `/products/[category]` | Category page (zipper tablet covers, universal tablet covers, mouse pads, …) |
-| `/products/[category]/[product]` | Product detail page |
+| `/products/[category]/[product]` | Product detail page (not used for "sections" categories such as mouse pads) |
 | `/headphone-leather-repair` | Dedicated headphone leather repair accessories page |
 | `/headphone-leather-repair/[product]` | Headphone accessory product page |
 | `/wholesale` | Wholesale & bulk inquiries + quote form |
@@ -127,13 +127,45 @@ If email is not configured or delivery fails, the form says the inquiry was **no
 For stricter rate limiting across serverless instances, back `src/lib/server/rate-limit.ts` with a shared
 store such as Upstash Redis.
 
-## Retail ordering
+## Prices, delivery and WhatsApp ordering
 
-Product pages have an order panel: choose a verified option (e.g. size), set a quantity (default 1) and
-press **Order via WhatsApp**. WhatsApp opens with the product name, option, quantity and product link and
-asks Tech Pouch to confirm availability, total price, delivery charges and Cash on Delivery availability.
-There are no public prices, carts or checkout. To add one later, add price fields to the `Product` type
-and build cart/checkout routes on top of the same catalog.
+Confirmed single-piece prices live on each product in `src/lib/catalog/products.ts`:
+
+```ts
+pricing: { amount: 1400, currency: "PKR", delivery: { kind: "included-in-city", city: "Lahore" } },
+// or: delivery: { kind: "extra" }  → delivery charges extra everywhere, including Lahore
+orderMessage: "Hello Tech Pouch, I want to order a zipper tablet cover for {price}. I am located in {city}. …",
+```
+
+| Product | Price | Delivery |
+| --- | --- | --- |
+| Zipper tablet covers | PKR 1,400 | Included in Lahore; extra outside Lahore (confirmed with customer) |
+| Universal tablet covers (7, 8, 10-inch) | PKR 1,200 | Included in Lahore; extra outside Lahore |
+| Wrist-rest mouse pads | PKR 250 | Extra for all locations |
+| Plain mouse pads | PKR 250 | Extra for all locations |
+| Headphone leather repair accessories | — (no `pricing`) | WhatsApp inquiry |
+
+Price labels, delivery notes, product cards, the FAQ pricing/delivery answers, Product structured data and
+WhatsApp messages are all generated from these fields (`src/lib/catalog/pricing.ts`). Products without
+`pricing` automatically show "For pricing and availability, contact us on WhatsApp." and an
+"Inquire on WhatsApp" button.
+
+`orderMessage` placeholders: `{price}`, `{size}` (selected size) and `{city}` (if present, the order panel
+shows an optional city field). The product name, chosen design, quantity (with per-piece price) and page link
+are appended automatically. No totals are calculated — delivery charges and the payable amount are confirmed
+on WhatsApp. Wholesale quotes stay separate from retail prices.
+
+### Mouse pads page
+
+The mouse pads category uses `display: "sections"`: every product in it (wrist-rest and plain) is shown in
+full on `/products/mouse-pads`, each with its own independent gallery, price and order button, and no
+separate product URLs. Images with a `design` name become selectable designs — clicking a thumbnail or a
+design option keeps the gallery and the WhatsApp message in sync.
+
+To add a design, put the image in `public/images/products/mouse-pads/` and add an entry to that product's
+`images` with `design: "Design Name"`. The current splash designs are generated sample illustrations
+(captioned "Sample design images" on the page); replace them with real photos when available and remove
+`imageNote`.
 
 ## Environment variables
 

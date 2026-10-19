@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { ProductImage } from "./ProductImage";
-import { getCategorySizes, productHref, type Category, type Product } from "@/lib/catalog";
+import { InquiryPriceNote, PriceTag } from "./PriceTag";
+import { getCategoryPrice, getCategorySizes, getProductsInCategory, productHref, type Category, type Product } from "@/lib/catalog";
 import { revealDelay } from "@/lib/reveal";
 
 type CategoryCardProps = {
@@ -12,6 +13,8 @@ type CategoryCardProps = {
   cta: string;
   media: ReactNode;
   sizes?: string[];
+  /** Price line (or inquiry note) shown under the description. */
+  price?: ReactNode;
   headingLevel?: "h2" | "h3";
   delay?: number;
 };
@@ -24,6 +27,7 @@ export function CategoryCard({
   cta,
   media,
   sizes,
+  price,
   headingLevel = "h3",
   delay = 0,
 }: CategoryCardProps) {
@@ -35,6 +39,7 @@ export function CategoryCard({
         <div className="flex flex-1 flex-col px-2 pt-4 pb-2">
           <Heading className="text-base font-semibold text-ink-900">{title}</Heading>
           <p className="mt-2 text-sm leading-relaxed text-ink-600">{description}</p>
+          {price}
           {sizes && sizes.length > 0 && (
             <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={`${title} size options`}>
               {sizes.map((size) => (
@@ -63,6 +68,14 @@ export function CategoryCard({
   );
 }
 
+/** Category cards show the shared single-piece price, or an inquiry note when none of its products are priced. */
+function categoryPrice(category: Category): ReactNode {
+  const price = getCategoryPrice(category.id);
+  if (price) return <PriceTag pricing={price} size="sm" />;
+  const items = getProductsInCategory(category.id);
+  return items.length > 0 && items.every((p) => !p.pricing) ? <InquiryPriceNote size="sm" /> : null;
+}
+
 const cardImageSizes = "(min-width: 1280px) 300px, (min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw";
 
 export function CategoryTile({
@@ -83,6 +96,7 @@ export function CategoryTile({
       description={category.summary}
       cta={category.cardCta}
       sizes={getCategorySizes(category.id)}
+      price={categoryPrice(category)}
       headingLevel={headingLevel}
       delay={delay}
       media={<ProductImage image={category.image} sizes={imageSizes} aspect="aspect-[4/3]" />}
@@ -106,6 +120,7 @@ export function ProductCard({
       description={product.shortDescription}
       cta="View Product"
       sizes={product.sizes}
+      price={product.pricing ? <PriceTag pricing={product.pricing} size="sm" /> : <InquiryPriceNote size="sm" />}
       headingLevel={headingLevel}
       delay={delay}
       media={<ProductImage image={product.images[0]} sizes={cardImageSizes} aspect="aspect-[4/3]" />}

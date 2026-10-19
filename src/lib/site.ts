@@ -39,7 +39,7 @@ export const whatsappMessages = {
   custom: "Hello Tech Pouch, I would like to discuss a custom manufacturing project.",
   retail: "Hello Tech Pouch, I would like to ask about product availability for a retail order.",
   headphoneRepair:
-    "Hello Tech Pouch, I would like to inquire about headphone leather repair accessories. My headphone model is:",
+    "Hello Tech Pouch, I am interested in your headphone leather repair accessories. Please share the available options, pricing, and delivery charges.",
 } as const;
 
 /** "Ask About This Product" message, including the product page link when available. */

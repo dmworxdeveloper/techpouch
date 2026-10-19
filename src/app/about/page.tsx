@@ -92,8 +92,8 @@ export default function AboutPage() {
               customers who need a product made to their specifications.
             </p>
             <p>
-              Prices, quantities and order details are discussed directly with our team, so every customer gets an answer that
-              fits their requirements.
+              Single-piece prices are listed on our product pages, while wholesale quantities, custom projects and order details are
+              discussed directly with our team.
             </p>
           </div>
         </Container>

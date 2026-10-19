@@ -4,6 +4,59 @@
  * customer to contact Tech Pouch. Update answers here once details are confirmed.
  */
 
+import { formatPrice, getCategoryById, publishedProducts, type RetailPrice } from "@/lib/catalog";
+
+/* Pricing and delivery answers are generated from the product data so they never drift from it. */
+type PriceGroup = { label: string; pricing?: RetailPrice };
+
+/** One entry per category, or per product when a category has several products. */
+function priceGroups(): PriceGroup[] {
+  const groups: PriceGroup[] = [];
+  for (const product of publishedProducts) {
+    const category = getCategoryById(product.categoryId);
+    const siblings = publishedProducts.filter((p) => p.categoryId === product.categoryId);
+    if (siblings.length === 1 && category) groups.push({ label: category.name.toLowerCase(), pricing: product.pricing });
+    else groups.push({ label: product.name.toLowerCase(), pricing: product.pricing });
+  }
+  return groups;
+}
+
+const listNames = (names: string[]) =>
+  names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}` : (names[0] ?? "");
+
+const deliveryText = (pricing: RetailPrice) =>
+  pricing.delivery.kind === "included-in-city" ? `delivery included in ${pricing.delivery.city}` : "delivery charges extra";
+
+function pricingAnswer(): string {
+  const groups = priceGroups();
+  const priced = groups.flatMap((g) => (g.pricing ? [`${g.label} are ${formatPrice(g.pricing)} each (${deliveryText(g.pricing)})`] : []));
+  const inquiry = groups.filter((g) => !g.pricing).map((g) => g.label);
+  return [
+    priced.length ? `Single-piece prices: ${listNames(priced)}.` : "",
+    inquiry.length ? `For ${listNames(inquiry)}, contact us on WhatsApp for pricing and availability.` : "",
+    "Wholesale prices for bulk quantities are quoted separately.",
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
+function deliveryAnswer(): string {
+  const groups = priceGroups().filter((g) => g.pricing);
+  const included = groups.filter((g) => g.pricing!.delivery.kind === "included-in-city");
+  const extra = groups.filter((g) => g.pricing!.delivery.kind === "extra");
+  const firstIncluded = included[0]?.pricing?.delivery;
+  const city = firstIncluded?.kind === "included-in-city" ? firstIncluded.city : "Lahore";
+  return [
+    included.length
+      ? `Delivery is included in the price of ${listNames(included.map((g) => g.label))} for customers in ${city}. Outside ${city}, delivery charges are extra and confirmed with you.`
+      : "",
+    extra.length ? `For ${listNames(extra.map((g) => g.label))}, delivery charges are extra for all locations, including ${city}.` : "",
+    "We confirm delivery charges and the total payable amount on WhatsApp before your order is finalised.",
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
 export type FaqTopic = "Products" | "Ordering" | "Wholesale" | "Custom Manufacturing" | "Delivery & Payment" | "Contact";
 
 export type Faq = {
@@ -68,9 +121,8 @@ export const faqs: Faq[] = [
   {
     id: "pricing",
     topic: "Ordering",
-    question: "Why are prices not shown on the website?",
-    answer:
-      "Prices depend on the product, option, quantity and delivery location, so we share them directly when you inquire. Send us a message on WhatsApp, by email or through one of our inquiry forms to request a price.",
+    question: "How much do your products cost?",
+    answer: pricingAnswer(),
   },
   {
     id: "online-checkout",
@@ -124,9 +176,8 @@ export const faqs: Faq[] = [
   {
     id: "delivery",
     topic: "Delivery & Payment",
-    question: "How does delivery work?",
-    answer:
-      "Delivery options, charges and timing depend on your location and order. Our team confirms these details with you before your order is finalised.",
+    question: "Are delivery charges included?",
+    answer: deliveryAnswer(),
   },
   {
     id: "contact",

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductDetail } from "@/components/products/ProductDetail";
-import { getCategoryById, getProduct, productHref, publishedProducts } from "@/lib/catalog";
+import { getCategoryById, getProduct, productHref, productsWithPages } from "@/lib/catalog";
 import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
-  return publishedProducts.flatMap((p) => {
+  return productsWithPages().flatMap((p) => {
     const category = getCategoryById(p.categoryId);
     return category?.placement === "catalog" ? [{ category: category.slug, product: p.slug }] : [];
   });

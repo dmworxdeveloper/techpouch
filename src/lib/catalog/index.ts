@@ -1,8 +1,9 @@
 import { categories } from "./categories";
 import { products } from "./products";
-import type { Category, Product } from "./types";
+import type { Category, Product, RetailPrice } from "./types";
 
-export type { CatalogImage, Category, Product, Specification, VariantGroup } from "./types";
+export type { CatalogImage, Category, DeliveryRule, Product, RetailPrice, Specification, VariantGroup } from "./types";
+export * from "./pricing";
 
 /*
  * Catalog queries. Pages only use these helpers, so moving the data to a CMS or
@@ -32,13 +33,31 @@ export function getProductsInCategory(categoryId: string): Product[] {
 
 export function getProduct(categorySlug: string, productSlug: string): { product: Product; category: Category } | undefined {
   const category = getCategoryBySlug(categorySlug);
-  const product = category && publishedProducts.find((p) => p.categoryId === category.id && p.slug === productSlug);
+  const product =
+    category && productsWithPages().find((p) => p.categoryId === category.id && p.slug === productSlug);
   return category && product ? { product, category } : undefined;
 }
 
+/** True when the product is shown in full on its category page instead of having its own page. */
+export function isSectionProduct(product: Product): boolean {
+  return getCategoryById(product.categoryId)?.display === "sections";
+}
+
+/** Products with their own detail page. */
+export const productsWithPages = () => publishedProducts.filter((p) => !isSectionProduct(p));
+
 export function productHref(product: Product): string {
   const category = getCategoryById(product.categoryId);
-  return `${category?.href ?? "/products"}/${product.slug}`;
+  const base = category?.href ?? "/products";
+  return isSectionProduct(product) ? `${base}#${product.slug}` : `${base}/${product.slug}`;
+}
+
+/** Shared price for a category's card when all its products have the same price, else undefined. */
+export function getCategoryPrice(categoryId: string): RetailPrice | undefined {
+  const prices = getProductsInCategory(categoryId).map((p) => p.pricing);
+  const [first] = prices;
+  if (!first || prices.some((p) => !p || p.amount !== first.amount || p.delivery.kind !== first.delivery.kind)) return undefined;
+  return first;
 }
 
 /** Products from the same category first, then other catalog products. */

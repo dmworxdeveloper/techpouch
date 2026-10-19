@@ -89,7 +89,7 @@ export default function WholesalePage() {
             id="wholesale-categories"
             eyebrow="Wholesale product categories"
             title="Products available for bulk supply"
-            description="Prices are not published — share the products and quantities you need and we will discuss pricing directly with you."
+            description="Wholesale prices are separate from single-piece retail prices and are not published — share the products and quantities you need and we will send you a quote."
             align="left"
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

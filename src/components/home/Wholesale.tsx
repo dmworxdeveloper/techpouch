@@ -24,7 +24,7 @@ const imageOf = (productId: string, index: number) => publishedProducts.find((p)
 const collage = [
   imageOf("universal-tablet-cover", 1),
   imageOf("zipper-tablet-cover", 0),
-  imageOf("mouse-pad", 1),
+  imageOf("wrist-rest-mouse-pad", 0),
   imageOf("zipper-tablet-cover", 1),
 ].filter((image) => image !== undefined);
 
@@ -60,7 +60,7 @@ export function Wholesale() {
             </ButtonLink>
           </div>
           <p className="reveal mt-4 text-xs text-ink-500">
-            Prices are not listed publicly — quantities, specifications and pricing are discussed directly with you.{" "}
+            Wholesale prices are not listed publicly — quantities, specifications and pricing are discussed directly with you.{" "}
             <Link href="/wholesale" className="font-semibold text-brand-600 hover:underline">
               Learn how wholesale works →
             </Link>

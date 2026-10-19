@@ -24,7 +24,7 @@ export const categories: Category[] = [
       height: 1024,
     },
     status: "published",
-    faqIds: ["tablet-sizes", "single-piece", "wholesale", "pricing"],
+    faqIds: ["tablet-sizes", "pricing", "delivery", "single-piece", "wholesale"],
     inquiryMessage: "Hello Tech Pouch, I would like to inquire about your zipper tablet covers.",
     seo: {
       title: "Zipper Tablet Covers — Retail & Wholesale",
@@ -50,7 +50,7 @@ export const categories: Category[] = [
       height: 1200,
     },
     status: "published",
-    faqIds: ["tablet-sizes", "compatibility", "single-piece", "wholesale"],
+    faqIds: ["tablet-sizes", "compatibility", "pricing", "delivery", "single-piece", "wholesale"],
     inquiryMessage: "Hello Tech Pouch, I would like to inquire about your universal tablet covers.",
     seo: {
       title: "Universal Tablet Covers — 7, 8 & 10-Inch",
@@ -66,21 +66,22 @@ export const categories: Category[] = [
     href: "/products/mouse-pads",
     summary: "Practical mouse pads for everyday desktop use, retail customers, and wholesale supply.",
     description:
-      "Tech Pouch mouse pads are made for everyday desktop use. Individual customers can order single pieces, and retailers and businesses can discuss bulk supply directly with our team.",
+      "Choose between wrist-rest and plain mouse pads, each in colourful splash designs. Single pieces are PKR 250 (delivery charges extra), and businesses can request wholesale quotes.",
+    display: "sections",
     cardCta: "Explore Mouse Pads",
     image: {
-      src: "/images/products/mouse-pads/mouse-pads-wrist-rest-assorted.webp",
-      alt: "Four mouse pads with wrist rests in black, pink, blue and orange",
-      width: 1000,
-      height: 1000,
+      src: "/images/products/mouse-pads/wrist-rest-mouse-pad-rainbow-splash.webp",
+      alt: "Sample illustration: wrist-rest mouse pad with a rainbow paint-splash design",
+      width: 1200,
+      height: 1200,
     },
     status: "published",
-    faqIds: ["single-piece", "wholesale", "pricing", "custom"],
+    faqIds: ["pricing", "delivery", "single-piece", "wholesale", "custom"],
     inquiryMessage: "Hello Tech Pouch, I would like to inquire about your mouse pads.",
     seo: {
-      title: "Mouse Pads — Mouse Pad Manufacturer & Supplier",
+      title: "Mouse Pads — Wrist-Rest & Plain, PKR 250",
       description:
-        "Mouse pads from Tech Pouch for everyday desktop use. Order single pieces or contact us as a mouse pad manufacturer and supplier for wholesale orders.",
+        "Wrist-rest and plain mouse pads from Tech Pouch in colourful splash designs. PKR 250 per piece, delivery charges extra. Wholesale quotes available.",
     },
   },
   {
@@ -104,7 +105,7 @@ export const categories: Category[] = [
       "Exact parts, sizes and compatible headphone models are being finalised. Share your headphone model and we will confirm what is available before you order.",
     faqIds: ["headphone-compatibility", "single-piece", "wholesale", "pricing"],
     inquiryMessage:
-      "Hello Tech Pouch, I would like to inquire about headphone leather repair accessories. My headphone model is:",
+      "Hello Tech Pouch, I am interested in your headphone leather repair accessories. Please share the available options, pricing, and delivery charges.",
     seo: {
       title: "Headphone Leather Repair Accessories",
       description:

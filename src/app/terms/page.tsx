@@ -40,7 +40,8 @@ export default function TermsPage() {
 
       <h2>Prices and orders</h2>
       <ul>
-        <li>Prices are not published on the website. They are provided directly when you inquire.</li>
+        <li>Single-piece retail prices are shown on product pages where available. Delivery charges are shown separately; where delivery is not included, it is confirmed with you before your order is finalised.</li>
+        <li>Wholesale and custom manufacturing prices are provided on request.</li>
         <li>Sending an inquiry or an “Order via WhatsApp” message is a request, not a confirmed order.</li>
         <li>An order is confirmed only when Tech Pouch has agreed the product, quantity, price and delivery details with you.</li>
         <li>Payment options — including whether Cash on Delivery is available — and delivery charges are confirmed for each order.</li>

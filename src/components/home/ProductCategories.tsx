@@ -47,7 +47,7 @@ export function ProductCategories() {
         </div>
 
         <p className="reveal mt-8 text-center text-sm text-ink-500">
-          Single pieces and bulk quantities are both welcome — prices are shared on request.
+          Single-piece prices are shown on each product. Wholesale prices for bulk quantities are shared on request.
         </p>
       </Container>
     </section>

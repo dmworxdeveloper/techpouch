@@ -3,15 +3,16 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { CtaBand } from "@/components/layout/CtaBand";
 import { CategoryTile, ProductGrid } from "@/components/products/ProductCard";
+import { ProductSection } from "@/components/products/ProductSection";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { EmptyState, InfoNotice } from "@/components/ui/StatusMessage";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { catalogCategories, getCategoryBySlug, getProductsInCategory } from "@/lib/catalog";
+import { catalogCategories, getCategoryBySlug, getProductsInCategory, productHref } from "@/lib/catalog";
 import { getFaqs } from "@/lib/faqs";
 import { pageMetadata } from "@/lib/seo";
-import { whatsappMessages, whatsappUrl } from "@/lib/site";
+import { absoluteUrl, whatsappMessages, whatsappUrl } from "@/lib/site";
 
 export function generateStaticParams() {
   return catalogCategories.map((c) => ({ category: c.slug }));
@@ -62,35 +63,76 @@ export default async function CategoryPage({ params }: PageProps<"/products/[cat
         </div>
       </PageHeader>
 
-      <section aria-labelledby="products-heading" className="py-14 sm:py-16">
-        <Container>
-          <h2 id="products-heading" className="text-2xl font-semibold tracking-tight text-ink-900">
-            {category.name} range
-          </h2>
-          {category.notice && (
-            <div className="mt-4 max-w-3xl">
-              <InfoNotice>{category.notice}</InfoNotice>
-            </div>
+      {category.display === "sections" && items.length > 0 ? (
+        <>
+          {items.length > 1 && (
+            <nav aria-label={`${category.name} types`} className="border-b border-line bg-white">
+              <Container className="flex flex-wrap gap-2 py-4">
+                {items.map((product) => (
+                  <a
+                    key={product.id}
+                    href={`#${product.slug}`}
+                    className="rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-700 transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700"
+                  >
+                    {product.name}
+                  </a>
+                ))}
+              </Container>
+            </nav>
           )}
-          <div className="mt-8">
-            {items.length > 0 ? (
-              <ProductGrid products={items} />
-            ) : (
-              <EmptyState
-                title="New products coming soon"
-                action={
-                  <ButtonLink href={whatsappUrl(category.inquiryMessage)} external variant="whatsapp">
-                    <WhatsAppIcon className="size-4" />
-                    Ask about availability
-                  </ButtonLink>
-                }
-              >
-                We are preparing this range. Message us to ask what is currently available.
-              </EmptyState>
+          {items.map((product, i) => (
+            <section
+              key={product.id}
+              id={product.slug}
+              aria-labelledby={`${product.slug}-heading`}
+              className={`scroll-mt-24 py-14 sm:py-16 ${i % 2 === 1 ? "bg-tint" : ""}`}
+            >
+              <Container>
+                {/* Heading sits above the gallery so each section is clearly labelled on mobile too. */}
+                <h2 id={`${product.slug}-heading`} className="mb-8 text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl">
+                  {product.name}
+                </h2>
+                <ProductSection
+                  product={product}
+                  category={category}
+                  url={absoluteUrl(productHref(product))}
+                  priority={i === 0}
+                />
+              </Container>
+            </section>
+          ))}
+        </>
+      ) : (
+        <section aria-labelledby="products-heading" className="py-14 sm:py-16">
+          <Container>
+            <h2 id="products-heading" className="text-2xl font-semibold tracking-tight text-ink-900">
+              {category.name} range
+            </h2>
+            {category.notice && (
+              <div className="mt-4 max-w-3xl">
+                <InfoNotice>{category.notice}</InfoNotice>
+              </div>
             )}
-          </div>
-        </Container>
-      </section>
+            <div className="mt-8">
+              {items.length > 0 ? (
+                <ProductGrid products={items} />
+              ) : (
+                <EmptyState
+                  title="New products coming soon"
+                  action={
+                    <ButtonLink href={whatsappUrl(category.inquiryMessage)} external variant="whatsapp">
+                      <WhatsAppIcon className="size-4" />
+                      Ask about availability
+                    </ButtonLink>
+                  }
+                >
+                  We are preparing this range. Message us to ask what is currently available.
+                </EmptyState>
+              )}
+            </div>
+          </Container>
+        </section>
+      )}
 
       {faqs.length > 0 && (
         <section aria-labelledby="category-faq" className="bg-tint py-14 sm:py-16">

@@ -56,10 +56,14 @@ export default function HeadphoneLeatherRepairPage() {
           </div>
         }
       >
+        <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-800 shadow-soft">
+          <WhatsAppIcon className="size-4 text-whatsapp-dark" />
+          For pricing and availability, contact us on WhatsApp.
+        </p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <ButtonLink href={whatsappUrl(whatsappMessages.headphoneRepair)} external variant="whatsapp" size="lg">
             <WhatsAppIcon className="size-5" />
-            Ask About Your Headphones
+            Inquire on WhatsApp
           </ButtonLink>
           <ButtonLink href="/wholesale" variant="outline" size="lg">
             Wholesale Inquiry

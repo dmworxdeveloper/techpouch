@@ -19,6 +19,12 @@ const nextConfig: NextConfig = {
         destination: "/headphone-leather-repair",
         permanent: true,
       },
+      {
+        // Mouse pad types are now sections on the category page.
+        source: "/products/mouse-pads/:product",
+        destination: "/products/mouse-pads",
+        permanent: true,
+      },
     ];
   },
   async headers() {
