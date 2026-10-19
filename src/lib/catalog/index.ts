@@ -2,7 +2,8 @@ import { categories } from "./categories";
 import { products } from "./products";
 import type { Category, Product, RetailPrice } from "./types";
 
-export type { CatalogImage, Category, DeliveryRule, Product, RetailPrice, Specification, VariantGroup } from "./types";
+export type { CatalogImage, Category, DeliveryRule, Product, RetailPrice, Specification, VariantGroup, WholesaleTerms } from "./types";
+export * from "./wholesale";
 export * from "./pricing";
 
 /*

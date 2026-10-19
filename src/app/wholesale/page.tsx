@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Boxes, Building2, ClipboardCheck, Lightbulb, ListChecks, MessagesSquare, PackageSearch, Send, Store, Truck } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { CtaBand } from "@/components/layout/CtaBand";
+import { Suspense } from "react";
 import { InquiryForm } from "@/components/forms/InquiryForm";
+import { WholesaleInquiryForm } from "@/components/forms/WholesaleInquiryForm";
 import { CategoryTile } from "@/components/products/ProductCard";
+import { WholesaleTermsTable } from "@/components/products/WholesaleTermsTable";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
@@ -100,7 +103,22 @@ export default function WholesalePage() {
         </Container>
       </section>
 
-      <section aria-labelledby="process-heading" className="py-14 sm:py-16">
+      <section id="wholesale-terms" aria-labelledby="terms-heading" className="scroll-mt-24 py-14 sm:py-16">
+        <Container>
+          <SectionHeading
+            id="terms-heading"
+            eyebrow="Wholesale terms"
+            title="Bulk pricing, MOQ and lead times by product"
+            description="Retail prices are for single pieces. Bulk prices, minimum order quantities, customization and lead times are confirmed for your quantity — request bulk pricing on any product below."
+            align="left"
+          />
+          <div className="mt-10">
+            <WholesaleTermsTable />
+          </div>
+        </Container>
+      </section>
+
+      <section aria-labelledby="process-heading" className="bg-tint py-14 sm:py-16">
         <Container>
           <SectionHeading id="process-heading" eyebrow="How it works" title="How wholesale inquiries work" />
           <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -126,7 +144,7 @@ export default function WholesalePage() {
         </Container>
       </section>
 
-      <section id="wholesale-inquiry" aria-labelledby="form-heading" className="scroll-mt-24 bg-tint py-14 sm:py-16">
+      <section id="wholesale-inquiry" aria-labelledby="form-heading" className="scroll-mt-24 py-14 sm:py-16">
         <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <SectionHeading
@@ -140,12 +158,15 @@ export default function WholesalePage() {
             </div>
           </div>
           <div className="reveal rounded-2xl border border-line bg-white p-5 shadow-soft sm:p-8 lg:col-span-8">
-            <InquiryForm formId="wholesale" />
+            {/* Fallback is the same form without pre-fill, so the static page always has a working form. */}
+            <Suspense fallback={<InquiryForm formId="wholesale" />}>
+              <WholesaleInquiryForm />
+            </Suspense>
           </div>
         </Container>
       </section>
 
-      <section aria-labelledby="wholesale-faq" className="py-14 sm:py-16">
+      <section aria-labelledby="wholesale-faq" className="bg-tint py-14 sm:py-16">
         <Container>
           <div className="mx-auto max-w-4xl">
             <h2 id="wholesale-faq" className="text-2xl font-semibold tracking-tight text-ink-900">

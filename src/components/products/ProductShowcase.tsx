@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from "react";
 import { OrderPanel } from "./OrderPanel";
 import { ProductGallery } from "./ProductGallery";
+import { WholesalePanel } from "./WholesalePanel";
 import type { Product } from "@/lib/catalog";
 
 /**
@@ -13,12 +14,15 @@ import type { Product } from "@/lib/catalog";
 export function ProductShowcase({
   product,
   productUrl,
+  categoryName,
   priority = false,
   before,
   after,
 }: {
   product: Product;
   productUrl: string;
+  /** Category name, used to pre-fill the wholesale form. */
+  categoryName: string;
   priority?: boolean;
   /** Server-rendered content above the order panel (description, price). */
   before?: ReactNode;
@@ -53,6 +57,7 @@ export function ProductShowcase({
           design={currentDesign}
           onDesignChange={selectDesign}
         />
+        <WholesalePanel product={product} categoryName={categoryName} productUrl={productUrl} />
         {after}
       </div>
     </div>

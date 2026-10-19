@@ -1,13 +1,23 @@
 "use client";
 
 import { useId, useState } from "react";
-import { FileText, MapPin, MessageCircleQuestion, Minus, Plus } from "lucide-react";
+import { MapPin, MessageCircleQuestion, Minus, Plus, ShoppingBag } from "lucide-react";
 import { buttonClasses } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { buildOrderMessage, isDeliveryIncluded, type Product } from "@/lib/catalog";
-import { productInquiryMessage, productQuoteMessage, whatsappUrl } from "@/lib/site";
+import { productInquiryMessage, whatsappUrl } from "@/lib/site";
 
 const MAX_RETAIL_QUANTITY = 999;
+
+/** Labels the retail pathway so it reads separately from the wholesale panel below it. */
+function RetailLabel() {
+  return (
+    <p className="mb-4 flex items-center gap-2 text-sm font-semibold text-ink-900">
+      <ShoppingBag className="size-4 text-brand-600" aria-hidden="true" />
+      Retail order <span className="font-normal text-ink-500">· single piece or small quantity</span>
+    </p>
+  );
+}
 
 type OrderProduct = Pick<Product, "name" | "pricing" | "orderMessage" | "sizes" | "inquiryMessage">;
 
@@ -75,7 +85,6 @@ export function OrderPanel({
   const [city, setCity] = useState("");
   const pricing = product.pricing;
   const asksCity = Boolean(product.orderMessage?.includes("{city}"));
-  const quoteHref = whatsappUrl(productQuoteMessage(product.name, productUrl));
 
   if (!pricing) {
     const inquiry = product.inquiryMessage
@@ -83,13 +92,10 @@ export function OrderPanel({
       : productInquiryMessage(product.name, productUrl);
     return (
       <div className="rounded-2xl border border-line bg-white p-5 shadow-soft sm:p-6">
+        <RetailLabel />
         <a href={whatsappUrl(inquiry)} target="_blank" rel="noopener noreferrer" className={buttonClasses("whatsapp", "lg", "w-full")}>
           <WhatsAppIcon className="size-5" />
           Inquire on WhatsApp
-        </a>
-        <a href={quoteHref} target="_blank" rel="noopener noreferrer" className={buttonClasses("outline", "md", "mt-3 w-full")}>
-          <FileText className="size-4" aria-hidden="true" />
-          Request a Wholesale Quote
         </a>
         <p className="mt-4 text-xs leading-relaxed text-ink-500">
           Our team will confirm product options, pricing and delivery charges with you on WhatsApp.
@@ -107,6 +113,7 @@ export function OrderPanel({
 
   return (
     <div className="rounded-2xl border border-line bg-white p-5 shadow-soft sm:p-6">
+      <RetailLabel />
       {sizes.length > 0 && <OptionGroup label="Size" options={sizes} value={size} onChange={setSize} />}
       {designs.length > 0 && design && onDesignChange && (
         <OptionGroup label="Design" options={designs} value={design} onChange={onDesignChange} />
@@ -184,20 +191,14 @@ export function OrderPanel({
           <WhatsAppIcon className="size-5" />
           Order via WhatsApp
         </a>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <a href={askHref} target="_blank" rel="noopener noreferrer" className={buttonClasses("secondary", "md", "w-full")}>
-            <MessageCircleQuestion className="size-4" aria-hidden="true" />
-            Ask About This Product
-          </a>
-          <a href={quoteHref} target="_blank" rel="noopener noreferrer" className={buttonClasses("outline", "md", "w-full")}>
-            <FileText className="size-4" aria-hidden="true" />
-            Wholesale Quote
-          </a>
-        </div>
+        <a href={askHref} target="_blank" rel="noopener noreferrer" className={buttonClasses("secondary", "md", "w-full")}>
+          <MessageCircleQuestion className="size-4" aria-hidden="true" />
+          Ask About This Product
+        </a>
       </div>
       <p className="mt-4 text-xs leading-relaxed text-ink-500">
         WhatsApp opens with your order details filled in. Our team confirms availability, delivery charges and the total
-        payable amount before your order is finalised. Wholesale prices are quoted separately.
+        payable amount before your order is finalised.
       </p>
     </div>
   );

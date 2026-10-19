@@ -49,17 +49,6 @@ export function productInquiryMessage(productName: string, url?: string): string
     .join("\n");
 }
 
-/** Wholesale quote request for a specific product. */
-export function productQuoteMessage(productName: string, url?: string): string {
-  return [
-    `Hello Tech Pouch, I would like a wholesale quote for ${productName}.`,
-    url && `Product link: ${url}`,
-    "Estimated quantity: ",
-  ]
-    .filter(Boolean)
-    .join("\n");
-}
-
 /** Retail order message used by "Order via WhatsApp". */
 export function orderMessage({
   productName,

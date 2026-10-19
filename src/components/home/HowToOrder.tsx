@@ -1,45 +1,48 @@
 import Image from "next/image";
-import { ArrowRight, Building2, ShoppingBag, type LucideIcon } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Building2, Check, FileText, ShoppingBag, type LucideIcon } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { howToOrderImage } from "@/lib/images";
-import { whatsappMessages, whatsappUrl } from "@/lib/site";
 import { revealDelay } from "@/lib/reveal";
 
-type OrderPath = {
+type Pathway = {
   icon: LucideIcon;
   title: string;
+  audience: string;
+  highlights: string[];
   steps: string[];
-  cta: string;
-  message: string;
-  variant: "primary" | "outline";
+  cta: { label: string; href: string; icon: LucideIcon };
+  link?: { label: string; href: string };
+  featured?: boolean;
 };
 
-const paths: OrderPath[] = [
+const pathways: Pathway[] = [
   {
     icon: ShoppingBag,
-    title: "For Retail Customers",
+    title: "For Individual Buyers",
+    audience: "One piece or a small quantity for yourself.",
+    highlights: ["Single-piece price shown on every product", "Delivery terms shown with each price"],
     steps: [
-      "Explore available products.",
-      "Ask about product availability and specifications.",
-      "Confirm the order through the available ordering process.",
+      "Choose a product, size or design.",
+      "Press “Order via WhatsApp” with your quantity and city.",
+      "We confirm delivery charges and the total before you pay.",
     ],
-    cta: "Chat on WhatsApp",
-    message: whatsappMessages.retail,
-    variant: "primary",
+    cta: { label: "Explore Products", href: "/products", icon: ArrowRight },
   },
   {
     icon: Building2,
-    title: "For Wholesale Customers",
+    title: "For Bulk Buyers",
+    audience: "Retailers, resellers, distributors and businesses.",
+    highlights: ["Bulk pricing by quantity", "MOQ, customization and lead time in your quote"],
     steps: [
-      "Select the product category.",
-      "Share required quantities and specifications.",
-      "Discuss wholesale pricing and order details directly with Tech Pouch.",
+      "Choose your products and estimated quantities.",
+      "Request bulk pricing through the wholesale form or WhatsApp.",
+      "Receive a quote with MOQ, pricing, customization options and lead time.",
     ],
-    cta: "Inquire on WhatsApp",
-    message: whatsappMessages.wholesale,
-    variant: "outline",
+    cta: { label: "Get a Wholesale Quote", href: "/wholesale#wholesale-inquiry", icon: FileText },
+    link: { label: "View wholesale terms by product", href: "/wholesale#wholesale-terms" },
+    featured: true,
   },
 ];
 
@@ -50,12 +53,16 @@ export function HowToOrder() {
     <section id="how-to-order" aria-labelledby="order-heading" className="bg-tint py-16 sm:py-20">
       <Container className="grid items-center gap-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <h2 id="order-heading" className="reveal text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl lg:text-[2.125rem]">
-            How to Order
+          <p className="reveal text-sm font-semibold tracking-wide text-brand-600 uppercase">Retail vs wholesale</p>
+          <h2
+            id="order-heading"
+            className="reveal mt-3 text-2xl font-semibold tracking-tight text-balance text-ink-900 sm:text-3xl lg:text-[2.125rem] lg:leading-tight"
+          >
+            Separate Pathways for Individual and Bulk Buyers
           </h2>
           <p className="reveal mt-3 text-ink-600">
-            Orders are arranged directly with our team. We confirm availability, payment and delivery options with
-            you before anything is finalised.
+            Buying one piece? Order at the listed price on WhatsApp. Buying for your business? Request bulk pricing and
+            we will quote for your quantity.
           </p>
           <div className="reveal relative mt-6 hidden aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-lift sm:block">
             {/* object-contain keeps the whole product visible whatever the photo's shape. */}
@@ -64,23 +71,42 @@ export function HowToOrder() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:col-span-8">
-          {paths.map(({ icon: Icon, title, steps, cta, message, variant }, i) => (
+          {pathways.map(({ icon: Icon, title, audience, highlights, steps, cta, link, featured }, i) => (
             <article
               key={title}
-              className="reveal flex flex-col rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-7"
+              className={`reveal flex flex-col rounded-2xl border p-6 shadow-soft sm:p-7 ${
+                featured ? "border-navy-800/20 bg-navy-900 text-white" : "border-line bg-white"
+              }`}
               style={revealDelay(i * 100)}
             >
               <div className="flex items-center gap-3">
-                <span className="grid size-10 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                <span
+                  className={`grid size-10 place-items-center rounded-xl ${featured ? "bg-white/10 text-brand-300" : "bg-brand-50 text-brand-600"}`}
+                >
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
-                <h3 className="text-lg font-semibold text-ink-900">{title}</h3>
+                <div>
+                  <h3 className={`text-lg font-semibold ${featured ? "text-white" : "text-ink-900"}`}>{title}</h3>
+                  <p className={`text-sm ${featured ? "text-white/65" : "text-ink-600"}`}>{audience}</p>
+                </div>
               </div>
-              <ol className="mt-5 space-y-3">
+
+              <ul className="mt-5 space-y-1.5">
+                {highlights.map((h) => (
+                  <li key={h} className={`flex gap-2 text-sm font-medium ${featured ? "text-white" : "text-ink-800"}`}>
+                    <Check className={`mt-0.5 size-4 shrink-0 ${featured ? "text-brand-300" : "text-brand-600"}`} aria-hidden="true" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
+
+              <ol className={`mt-5 space-y-3 border-t pt-5 ${featured ? "border-white/10" : "border-line"}`}>
                 {steps.map((step, n) => (
-                  <li key={step} className="flex gap-3 text-sm text-ink-700">
+                  <li key={step} className={`flex gap-3 text-sm ${featured ? "text-white/80" : "text-ink-700"}`}>
                     <span
-                      className="grid size-6 shrink-0 place-items-center rounded-full bg-brand-600 text-xs font-semibold text-white"
+                      className={`grid size-6 shrink-0 place-items-center rounded-full text-xs font-semibold ${
+                        featured ? "bg-white text-navy-900" : "bg-brand-600 text-white"
+                      }`}
                       aria-hidden="true"
                     >
                       {n + 1}
@@ -89,12 +115,20 @@ export function HowToOrder() {
                   </li>
                 ))}
               </ol>
+
               <div className="mt-auto pt-7">
-                <ButtonLink href={whatsappUrl(message)} external variant={variant}>
-                  <WhatsAppIcon className="size-4" />
-                  {cta}
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                <ButtonLink href={cta.href} variant={featured ? "light" : "primary"}>
+                  <cta.icon className="size-4" aria-hidden="true" />
+                  {cta.label}
                 </ButtonLink>
+                {link && (
+                  <Link
+                    href={link.href}
+                    className={`mt-3 block text-sm font-medium underline-offset-2 hover:underline ${featured ? "text-brand-200" : "text-brand-600"}`}
+                  >
+                    {link.label} →
+                  </Link>
+                )}
               </div>
             </article>
           ))}

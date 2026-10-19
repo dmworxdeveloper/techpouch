@@ -1,10 +1,8 @@
 import Image from "next/image";
-import { ArrowRight, CircleCheck } from "lucide-react";
+import { ArrowRight, CircleCheck, FileText } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { heroImages } from "@/lib/images";
-import { whatsappMessages, whatsappUrl } from "@/lib/site";
 
 const highlights = ["Retail Orders", "Wholesale Supply", "Custom Manufacturing"];
 
@@ -65,26 +63,26 @@ export function Hero() {
       <Container className="relative grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-12 lg:gap-6 lg:py-20">
         <div className="lg:col-span-6">
           <p className="inline-block animate-fade-up rounded-md bg-white px-2.5 py-1 text-xs font-semibold tracking-[0.14em] text-ink-800 uppercase shadow-soft">
-            Tech Pouch
+            Tech Pouch · Manufacturer
           </p>
           <h1
             id="hero-heading"
             className="mt-5 animate-fade-up text-4xl font-semibold tracking-tight text-balance text-ink-900 [animation-delay:80ms] sm:text-5xl lg:text-[3.1rem] lg:leading-[1.15]"
           >
-            Quality Tech Accessories for <span className="text-brand-600">Every Need</span>
+            Tech Accessories Manufacturer for <span className="text-brand-600">Retail &amp; Wholesale</span>
           </h1>
           <p className="mt-5 max-w-xl animate-fade-up text-lg leading-relaxed text-pretty text-ink-600 [animation-delay:160ms]">
-            We manufacture tech accessories including tablet covers, mouse pads and more — for individual
-            customers, retailers and businesses looking for a reliable manufacturing partner.
+            We make zipper and universal tablet covers and mouse pads — order a single piece or buy in bulk for your
+            store. Have your own product idea? We also take on custom manufacturing.
           </p>
           <div className="mt-8 flex animate-fade-up flex-col gap-3 [animation-delay:240ms] sm:flex-row">
-            <ButtonLink href="/#products" size="lg">
-              Explore Our Products
+            <ButtonLink href="/products" size="lg">
+              Explore Products
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </ButtonLink>
-            <ButtonLink href={whatsappUrl(whatsappMessages.wholesale)} external variant="outline" size="lg">
-              <WhatsAppIcon className="size-4" />
-              Discuss Wholesale Orders
+            <ButtonLink href="/wholesale#wholesale-inquiry" variant="outline" size="lg">
+              <FileText className="size-4" aria-hidden="true" />
+              Get a Wholesale Quote
             </ButtonLink>
           </div>
           <ul className="mt-8 flex animate-fade-up flex-wrap gap-x-6 gap-y-3 [animation-delay:320ms]">

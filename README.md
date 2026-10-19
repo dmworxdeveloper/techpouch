@@ -173,6 +173,24 @@ shows an optional city field). The product name, chosen design, quantity (with p
 are appended automatically. No totals are calculated — delivery charges and the payable amount are confirmed
 on WhatsApp. Wholesale quotes stay separate from retail prices.
 
+### Wholesale terms (MOQ, bulk pricing, customization, lead time)
+
+Every product page has a separate **Wholesale & Bulk Orders** panel, and `/wholesale#wholesale-terms` lists
+the same terms for all products. Each product has a "Request Bulk Pricing" button that opens the wholesale
+form pre-filled with the product and quantity.
+
+Until confirmed, each term shows "Confirmed with your quote". Add the real values per product in
+`src/lib/catalog/products.ts`:
+
+```ts
+wholesale: {
+  moq: "50 pieces",
+  bulkPricing: "PKR 1,050 per piece for 50–199; PKR 950 for 200+",
+  customization: "Custom colours and logo printing from 100 pieces",
+  leadTime: "7–10 working days after confirmation",
+},
+```
+
 ### Mouse pads page
 
 The mouse pads category uses `display: "sections"`: wrist-rest and plain mouse pads are both shown in full

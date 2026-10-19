@@ -1,9 +1,18 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
 import { ProductImage } from "./ProductImage";
 import { InquiryPriceNote, PriceTag } from "./PriceTag";
-import { getCategoryPrice, getCategorySizes, getProductsInCategory, productHref, type Category, type Product } from "@/lib/catalog";
+import {
+  bulkPricingHref,
+  getCategoryById,
+  getCategoryPrice,
+  getCategorySizes,
+  getProductsInCategory,
+  productHref,
+  type Category,
+  type Product,
+} from "@/lib/catalog";
 import { revealDelay } from "@/lib/reveal";
 
 type CategoryCardProps = {
@@ -15,6 +24,8 @@ type CategoryCardProps = {
   sizes?: string[];
   /** Price line (or inquiry note) shown under the description. */
   price?: ReactNode;
+  /** Adds a "Request Bulk Pricing" link for wholesale buyers. */
+  bulkHref?: string;
   headingLevel?: "h2" | "h3";
   delay?: number;
 };
@@ -28,6 +39,7 @@ export function CategoryCard({
   media,
   sizes,
   price,
+  bulkHref,
   headingLevel = "h3",
   delay = 0,
 }: CategoryCardProps) {
@@ -61,6 +73,16 @@ export function CategoryCard({
               {cta}
               <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </Link>
+            {bulkHref && (
+              // Sits above the card-wide link overlay so it stays separately clickable.
+              <Link
+                href={bulkHref}
+                className="relative z-10 mt-2 flex min-h-9 w-fit items-center gap-1.5 text-xs font-semibold text-ink-700 underline-offset-2 hover:text-brand-600 hover:underline focus-visible:outline-2 focus-visible:outline-brand-500"
+              >
+                <FileText className="size-3.5" aria-hidden="true" />
+                Request Bulk Pricing
+              </Link>
+            )}
           </div>
         </div>
       </article>
@@ -97,6 +119,7 @@ export function CategoryTile({
       cta={category.cardCta}
       sizes={getCategorySizes(category.id)}
       price={categoryPrice(category)}
+      bulkHref={bulkPricingHref(category.name, category.name)}
       headingLevel={headingLevel}
       delay={delay}
       media={<ProductImage image={category.image} sizes={imageSizes} aspect="aspect-[4/3]" />}
@@ -120,6 +143,7 @@ export function ProductCard({
       description={product.shortDescription}
       cta="View Product"
       sizes={product.sizes}
+      bulkHref={bulkPricingHref(product.name, getCategoryById(product.categoryId)?.name)}
       price={product.pricing ? <PriceTag pricing={product.pricing} size="sm" /> : <InquiryPriceNote size="sm" />}
       headingLevel={headingLevel}
       delay={delay}

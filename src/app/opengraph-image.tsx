@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Tech Pouch — tablet covers, mouse pads and custom manufacturing";
+export const alt = "Tech Pouch — tech accessories manufacturer for retail and wholesale";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -28,8 +28,8 @@ export default function OpenGraphImage() {
       >
         <img src={logoSrc} width={466} height={84} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 68, fontWeight: 800, lineHeight: 1.1 }}>Quality Tech Accessories</div>
-          <div style={{ fontSize: 68, fontWeight: 800, lineHeight: 1.1, color: "#5b8dff" }}>for Every Need</div>
+          <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.1 }}>Tech Accessories Manufacturer</div>
+          <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.1, color: "#5b8dff" }}>for Retail &amp; Wholesale</div>
         </div>
         <div style={{ fontSize: 28, color: "rgba(255,255,255,0.7)" }}>
           Tablet Covers • Mouse Pads • Wholesale Supply • Custom Manufacturing

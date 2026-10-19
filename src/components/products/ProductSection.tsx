@@ -57,6 +57,7 @@ export function ProductSection({
       <ProductShowcase
         product={product}
         productUrl={url}
+        categoryName={category.name}
         priority={priority}
         before={
           <>
