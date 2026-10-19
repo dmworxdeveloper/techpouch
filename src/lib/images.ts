@@ -29,8 +29,8 @@ export const b2bCollageImages = [
 
 /** Photo beside "How to Order" on the homepage. */
 export const howToOrderImage = {
-  src: "/images/products/universal-tablet-covers/universal-tablet-cover-red.webp",
-  alt: "Red universal tablet cover with a rotating clasp, standing upright",
+  src: "/images/products/universal-tablet-covers/universal-tablet-covers-colours.webp",
+  alt: "Universal tablet covers in white, black, purple, red and teal, shown with tablets",
 };
 
 export const customBandImages = {

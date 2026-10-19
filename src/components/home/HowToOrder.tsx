@@ -57,8 +57,9 @@ export function HowToOrder() {
             Orders are arranged directly with our team. We confirm availability, payment and delivery options with
             you before anything is finalised.
           </p>
-          <div className="reveal relative mt-6 hidden aspect-[4/3] overflow-hidden rounded-2xl shadow-lift sm:block">
-            <Image src={sideImage.src} alt={sideImage.alt} fill sizes="(min-width: 1024px) 380px, 90vw" className="object-cover" />
+          <div className="reveal relative mt-6 hidden aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-lift sm:block">
+            {/* object-contain keeps the whole product visible whatever the photo's shape. */}
+            <Image src={sideImage.src} alt={sideImage.alt} fill sizes="(min-width: 1024px) 380px, 90vw" className="object-contain p-3" />
           </div>
         </div>
 
