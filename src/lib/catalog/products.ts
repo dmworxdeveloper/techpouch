@@ -8,17 +8,24 @@ import type { CatalogImage, Product } from "./types";
  * Only list sizes, variants, features and specifications that Tech Pouch has confirmed.
  */
 
-const img = (folder: string, file: string, alt: string, width = 1024, height = 1024): CatalogImage => ({
-  src: `/images/products/${folder}/${file}.webp`,
+/**
+ * Builds a gallery image entry. Put the photo in /public/images/products/<folder>/ and add
+ * it to a product's `images` array, e.g.
+ *   images: [productImage("zipper-tablet-covers", "zipper-cover-front", "Black zipper tablet cover, front view")],
+ * The first image is the main gallery image; two or more images show the thumbnail row.
+ * `design` (optional) makes the image a selectable design in the order panel.
+ */
+export const productImage = (
+  folder: string,
+  file: string,
+  alt: string,
+  { width = 1200, height = 1200, design, ext = "webp" }: { width?: number; height?: number; design?: string; ext?: string } = {},
+): CatalogImage => ({
+  src: `/images/products/${folder}/${file}.${ext}`,
   alt,
   width,
   height,
-});
-
-/** Temporary mouse pad design image (illustration, not a product photo). */
-const design = (file: string, name: string, description: string): CatalogImage => ({
-  ...img("mouse-pads", file, `Sample illustration: ${description}`, 1200, 1200),
-  design: name,
+  ...(design ? { design } : {}),
 });
 
 export const products: Product[] = [
@@ -37,11 +44,8 @@ export const products: Product[] = [
     pricing: { amount: 1400, currency: "PKR", delivery: { kind: "included-in-city", city: "Lahore" } },
     orderMessage:
       "Hello Tech Pouch, I want to order a zipper tablet cover for {price}. I am located in {city}. Please confirm my order and delivery details.",
-    images: [
-      img("zipper-tablet-covers", "zipper-tablet-cover-black", "Black zipper tablet cover sleeve with a metal zip pull"),
-      img("zipper-tablet-covers", "zipper-tablet-cover-pink", "Pink zipper tablet cover sleeve shown upright"),
-      img("zipper-tablet-covers", "zipper-tablet-cover-white", "White zipper tablet cover sleeve on a white background"),
-    ],
+    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
+    images: [],
     features: [
       "Zipper-style closure",
       "Designed for everyday storage and portability",
@@ -70,11 +74,8 @@ export const products: Product[] = [
       "A universal tablet cover available in 7-inch, 8-inch and 10-inch options, so you can choose the size that matches your tablet.",
       "Not sure which size fits? Share your tablet model or its measurements and our team will confirm the right option before you order.",
     ],
-    images: [
-      img("universal-tablet-covers", "universal-tablet-cover-red", "Red universal tablet cover with a rotating clasp, standing upright", 1200, 1200),
-      img("universal-tablet-covers", "universal-tablet-cover-stand-views", "Red universal tablet cover shown closed, open and as a tablet stand"),
-      img("universal-tablet-covers", "universal-tablet-cover-blue", "Blue universal tablet cover shown from several angles with a tablet inside", 1200, 1200),
-    ],
+    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
+    images: [],
     sizes: ["7-inch", "8-inch", "10-inch"],
     pricing: { amount: 1200, currency: "PKR", delivery: { kind: "included-in-city", city: "Lahore" } },
     orderMessage:
@@ -101,31 +102,25 @@ export const products: Product[] = [
     categoryId: "mouse-pads",
     name: "Wrist-Rest Mouse Pads",
     status: "published",
-    shortDescription: "Mouse pads with a built-in wrist rest, in colourful splash designs.",
+    shortDescription: "Mouse pads with a built-in wrist rest for comfortable everyday desktop use.",
     description: [
       "Mouse pads with a built-in wrist rest for everyday desktop use.",
-      "Choose a design from the gallery and order a single piece on WhatsApp. Delivery charges are extra for all locations, including Lahore.",
+      "Order a single piece on WhatsApp and ask our team about the designs currently available. Delivery charges are extra for all locations, including Lahore.",
     ],
     pricing: { amount: 250, currency: "PKR", delivery: { kind: "extra" } },
     orderMessage:
       "Hello Tech Pouch, I want to order a wrist-rest mouse pad for {price}. Please confirm delivery charges and the total payable amount.",
-    // Temporary design illustrations — replace with product photos (keep the `design` names in sync).
-    images: [
-      design("wrist-rest-mouse-pad-rainbow-splash", "Rainbow Splash", "wrist-rest mouse pad with a rainbow paint-splash design on white"),
-      design("wrist-rest-mouse-pad-ocean-splash", "Ocean Splash", "wrist-rest mouse pad with a blue paint-splash design on navy"),
-      design("wrist-rest-mouse-pad-neon-splash", "Neon Splash", "wrist-rest mouse pad with a neon paint-splash design on black"),
-      design("wrist-rest-mouse-pad-sunset-splash", "Sunset Splash", "wrist-rest mouse pad with an orange and pink paint-splash design on cream"),
-    ],
-    imageNote: "Sample design images — actual product photos coming soon.",
-    features: ["Built-in wrist rest", "Colourful splash designs", "Single pieces and wholesale quantities"],
+    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
+    images: [],
+    features: ["Built-in wrist rest", "Ask about available designs", "Single pieces and wholesale quantities"],
     specifications: [
       { label: "Type", value: "Mouse pad with wrist rest" },
-      { label: "Designs", value: "Shown in the gallery; availability confirmed on order" },
+      { label: "Designs", value: "Confirmed on inquiry" },
     ],
     faqIds: ["pricing", "delivery", "single-piece", "wholesale", "cod"],
     seo: {
       title: "Wrist-Rest Mouse Pads",
-      description: "Wrist-rest mouse pads from Tech Pouch in splash designs, PKR 250 per piece (delivery extra).",
+      description: "Wrist-rest mouse pads from Tech Pouch, PKR 250 per piece (delivery charges extra). Order on WhatsApp.",
     },
   },
   {
@@ -134,31 +129,25 @@ export const products: Product[] = [
     categoryId: "mouse-pads",
     name: "Plain Mouse Pads",
     status: "published",
-    shortDescription: "Flat mouse pads without wrist support, in colourful splash designs.",
+    shortDescription: "Flat mouse pads without wrist support for everyday desktop use.",
     description: [
       "Flat mouse pads without wrist support for everyday desktop use.",
-      "Choose a design from the gallery and order a single piece on WhatsApp. Delivery charges are extra for all locations, including Lahore.",
+      "Order a single piece on WhatsApp and ask our team about the designs currently available. Delivery charges are extra for all locations, including Lahore.",
     ],
     pricing: { amount: 250, currency: "PKR", delivery: { kind: "extra" } },
     orderMessage:
       "Hello Tech Pouch, I want to order a plain mouse pad for {price}. Please confirm delivery charges and the total payable amount.",
-    // Temporary design illustrations — replace with product photos (keep the `design` names in sync).
-    images: [
-      design("plain-mouse-pad-rainbow-splash", "Rainbow Splash", "flat mouse pad with a rainbow paint-splash design on white"),
-      design("plain-mouse-pad-galaxy-splash", "Galaxy Splash", "flat mouse pad with a purple and pink paint-splash design on dark purple"),
-      design("plain-mouse-pad-neon-splash", "Neon Splash", "flat mouse pad with a neon paint-splash design on black"),
-      design("plain-mouse-pad-ocean-splash", "Ocean Splash", "flat mouse pad with a blue paint-splash design on navy"),
-    ],
-    imageNote: "Sample design images — actual product photos coming soon.",
-    features: ["Flat design without wrist support", "Colourful splash designs", "Single pieces and wholesale quantities"],
+    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
+    images: [],
+    features: ["Flat design without wrist support", "Ask about available designs", "Single pieces and wholesale quantities"],
     specifications: [
       { label: "Type", value: "Flat mouse pad" },
-      { label: "Designs", value: "Shown in the gallery; availability confirmed on order" },
+      { label: "Designs", value: "Confirmed on inquiry" },
     ],
     faqIds: ["pricing", "delivery", "single-piece", "wholesale", "cod"],
     seo: {
       title: "Plain Mouse Pads",
-      description: "Plain flat mouse pads from Tech Pouch in splash designs, PKR 250 per piece (delivery extra).",
+      description: "Plain flat mouse pads from Tech Pouch, PKR 250 per piece (delivery charges extra). Order on WhatsApp.",
     },
   },
   {
@@ -173,10 +162,8 @@ export const products: Product[] = [
       "Leather replacement ear pads for restoring worn headphone cushions.",
       "Ear pads come in different shapes and sizes, so please share your headphone brand and model when you inquire. Our team will confirm whether a suitable replacement is available.",
     ],
-    images: [
-      img("headphone-leather-repair", "headphone-ear-pads-leather", "Pair of round black leather headphone ear pads", 960, 960),
-      img("headphone-leather-repair", "headphone-ear-pads-oval", "Pair of oval black leather headphone ear pads", 1040, 736),
-    ],
+    // Gallery is empty until Tech Pouch uploads its own product photos (see productImage above).
+    images: [],
     features: [
       "Leather replacement ear pads",
       "Suitability confirmed for your headphone model",

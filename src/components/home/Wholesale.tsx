@@ -5,7 +5,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { publishedProducts } from "@/lib/catalog";
+import { b2bCollageImages } from "@/lib/images";
 import { whatsappMessages, whatsappUrl } from "@/lib/site";
 
 const inquiryTypes = [
@@ -20,13 +20,7 @@ const inquiryTypes = [
  * Photo collage for the B2B section. Swap these for a workshop or production photo
  * once one is available (keep it a real Tech Pouch photo, not stock imagery).
  */
-const imageOf = (productId: string, index: number) => publishedProducts.find((p) => p.id === productId)?.images[index];
-const collage = [
-  imageOf("universal-tablet-cover", 1),
-  imageOf("zipper-tablet-cover", 0),
-  imageOf("wrist-rest-mouse-pad", 0),
-  imageOf("zipper-tablet-cover", 1),
-].filter((image) => image !== undefined);
+const collage = b2bCollageImages;
 
 export function Wholesale() {
   return (

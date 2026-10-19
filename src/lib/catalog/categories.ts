@@ -66,7 +66,7 @@ export const categories: Category[] = [
     href: "/products/mouse-pads",
     summary: "Practical mouse pads for everyday desktop use, retail customers, and wholesale supply.",
     description:
-      "Choose between wrist-rest and plain mouse pads, each in colourful splash designs. Single pieces are PKR 250 (delivery charges extra), and businesses can request wholesale quotes.",
+      "Choose between wrist-rest and plain mouse pads. Single pieces are PKR 250 (delivery charges extra), and businesses can request wholesale quotes.",
     display: "sections",
     cardCta: "Explore Mouse Pads",
     image: {
@@ -81,7 +81,7 @@ export const categories: Category[] = [
     seo: {
       title: "Mouse Pads — Wrist-Rest & Plain, PKR 250",
       description:
-        "Wrist-rest and plain mouse pads from Tech Pouch in colourful splash designs. PKR 250 per piece, delivery charges extra. Wholesale quotes available.",
+        "Wrist-rest and plain mouse pads from Tech Pouch. PKR 250 per piece, delivery charges extra. Wholesale quotes available."
     },
   },
   {

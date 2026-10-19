@@ -87,18 +87,34 @@ headphone repair; those need a route folder like `src/app/headphone-leather-repa
 
 Only add sizes, variants, specifications and compatibility details that Tech Pouch has confirmed.
 
-## Replacing product images
+## Product galleries and images
 
-1. Put the new photo in `public/images/products/<category>/` with a descriptive file name
-   (WebP or JPEG, ideally square, at least 1000 px).
-2. Update `src`, `alt` (describe what the photo shows), `width` and `height` in
-   `products.ts` (and `categories.ts` for the category card image).
+Every product page has a **Product Gallery** (`src/components/products/ProductGallery.tsx`). Galleries are
+currently empty on purpose: until photos are added, each shows a clean "Product photos coming soon" frame
+with no thumbnail row, and product cards show a matching small frame.
 
-Frames use fixed aspect ratios with `object-contain`, so no layout changes are needed. The decorative
-hero/about compositions use the transparent cut-outs referenced in `src/lib/images.ts`.
+To add photos to a product:
 
-> **Before launch:** the current photos came from the supplied `tech-pouch.zip`. Several look like
-> marketplace listing images and some are AI-generated. Replace them with Tech Pouch's own photography.
+1. Put the files in `public/images/products/<category>/` (WebP or JPEG, ideally square, at least 1000 px),
+   e.g. `public/images/products/zipper-tablet-covers/zipper-cover-front.webp`.
+2. Add them to the product's `images` array in `src/lib/catalog/products.ts`:
+
+   ```ts
+   images: [
+     productImage("zipper-tablet-covers", "zipper-cover-front", "Black zipper tablet cover, front view"),
+     productImage("zipper-tablet-covers", "zipper-cover-open", "Zipper tablet cover open with tablet inside"),
+   ],
+   ```
+
+   - The first image becomes the main image and the product card image.
+   - Two or more images automatically show clickable thumbnails.
+   - Options: `{ width, height, ext: "jpg", design: "Black" }`. A `design` name makes the image a
+     selectable design that is included in the WhatsApp order message.
+
+Each mouse pad type (wrist-rest and plain) has its own `images` array, so their galleries stay separate.
+
+Category card images (homepage and product listing) are set separately in `src/lib/catalog/categories.ts`,
+and the homepage B2B collage in `src/lib/images.ts`.
 
 ## Inquiry forms
 
@@ -157,15 +173,8 @@ on WhatsApp. Wholesale quotes stay separate from retail prices.
 
 ### Mouse pads page
 
-The mouse pads category uses `display: "sections"`: every product in it (wrist-rest and plain) is shown in
-full on `/products/mouse-pads`, each with its own independent gallery, price and order button, and no
-separate product URLs. Images with a `design` name become selectable designs — clicking a thumbnail or a
-design option keeps the gallery and the WhatsApp message in sync.
-
-To add a design, put the image in `public/images/products/mouse-pads/` and add an entry to that product's
-`images` with `design: "Design Name"`. The current splash designs are generated sample illustrations
-(captioned "Sample design images" on the page); replace them with real photos when available and remove
-`imageNote`.
+The mouse pads category uses `display: "sections"`: wrist-rest and plain mouse pads are both shown in full
+on `/products/mouse-pads`, each with its own gallery, price and order button, and no separate product URLs.
 
 ## Environment variables
 

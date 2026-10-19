@@ -17,7 +17,7 @@ export function productJsonLd(product: Product, url: string) {
     "@type": "Product",
     name: product.name,
     description: product.shortDescription,
-    image: product.images.map((image) => absoluteUrl(image.src)),
+    ...(product.images.length ? { image: product.images.map((image) => absoluteUrl(image.src)) } : {}),
     brand: { "@type": "Brand", name: siteConfig.name },
     offers: {
       "@type": "Offer",
