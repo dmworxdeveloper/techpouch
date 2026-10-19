@@ -51,7 +51,7 @@ export const products: Product[] = [
       "Designed for everyday storage and portability",
       "Available for retail and wholesale orders",
     ],
-    cta: "Explore Zipper Tablet Covers",
+    cta: "Explore Zipper Covers",
     whatsappMessage: "Hello Tech Pouch, I would like to inquire about your zipper tablet covers.",
     image: img("zipper-tablet-cover-black", "Black zipper tablet cover sleeve with a metal zip pull"),
     gallery: [
@@ -140,8 +140,7 @@ export const products: Product[] = [
     slug: "headphone-leather-repair-accessories",
     name: "Headphone Leather Repair Accessories",
     tier: "secondary",
-    summary:
-      "Selected leather repair accessories for headphones. Tell us what you need and we will confirm availability.",
+    summary: "Repair and restore your headphones with leather replacement parts.",
     intro:
       "Alongside our main product range, Tech Pouch supplies selected headphone leather repair accessories. Share your headphone model and the part you need, and our team will confirm what is available.",
     details: [
@@ -149,7 +148,7 @@ export const products: Product[] = [
       "Share your headphone model so we can check suitability",
       "Single pieces and bulk inquiries welcome",
     ],
-    cta: "View Repair Accessories",
+    cta: "View Accessories",
     whatsappMessage:
       "Hello Tech Pouch, I would like to inquire about headphone leather repair accessories. My headphone model is:",
     image: img(

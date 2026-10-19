@@ -39,8 +39,14 @@ back to `http://localhost:3000`.
 - **Business details, WhatsApp number, prefilled messages, navigation** — `src/lib/site.ts`
 - **Products (names, descriptions, verified details, sizes, images, SEO text)** — `src/lib/products.ts`.
   Adding an entry there creates its product page, nav/footer links and sitemap entry.
-- **Logo** — `src/components/layout/Logo.tsx` (text wordmark; swap for an `<Image>` when a logo file exists)
-  and `src/app/icon.svg` (favicon).
+- **Logo** — `src/components/layout/Logo.tsx` (SVG "TP" monogram + wordmark; swap for an `<Image>` when a
+  logo file exists) and `src/app/icon.svg` (favicon).
+- **Hero and section artwork** — transparent product cut-outs in `public/images/cutouts/`, referenced from
+  `src/lib/images.ts`.
+- **Social media icons** — set real profile URLs in `socialLinks` (`src/lib/site.ts`); icons stay hidden
+  until a URL is set.
+- **Site search** — the header search (`src/components/layout/SearchDialog.tsx`) searches product and page
+  titles; new products are included automatically.
 - **Homepage sections** — `src/components/home/*`, assembled in `src/app/page.tsx`.
 - **Colours and fonts** — theme tokens at the top of `src/app/globals.css`.
 

@@ -1,66 +1,74 @@
-import { Boxes, Building2, Lightbulb, PackageSearch, Store } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Boxes, Building2, FileText, Lightbulb, PackageSearch, Store } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { getProduct } from "@/lib/products";
 import { whatsappMessages, whatsappUrl } from "@/lib/site";
-import { revealDelay } from "@/lib/reveal";
 
 const inquiryTypes = [
-  { icon: Boxes, title: "Wholesale and bulk orders", text: "Discuss quantities for resale or distribution." },
-  { icon: Store, title: "Retail product inquiries", text: "Ask about products for your store or shelf." },
-  { icon: PackageSearch, title: "Product sourcing", text: "Tell us which tech accessories you are looking for." },
-  { icon: Lightbulb, title: "Custom product development", text: "Share an idea and discuss whether we can make it." },
-  { icon: Building2, title: "Business and reseller inquiries", text: "Explore working with Tech Pouch as a supplier." },
+  { icon: Boxes, title: "Wholesale & bulk orders" },
+  { icon: Store, title: "Retail product inquiries" },
+  { icon: PackageSearch, title: "Product sourcing" },
+  { icon: Lightbulb, title: "Custom product development" },
+  { icon: Building2, title: "Business and reseller inquiries" },
+];
+
+/**
+ * Photo collage for the B2B section. Swap these for a workshop or production photo
+ * once one is available (keep it a real Tech Pouch photo, not stock imagery).
+ */
+const collage = [
+  getProduct("universal-tablet-covers")!.gallery[1],
+  getProduct("zipper-tablet-covers")!.image,
+  getProduct("mouse-pads")!.gallery[0],
+  getProduct("zipper-tablet-covers")!.gallery[0],
 ];
 
 export function Wholesale() {
   return (
-    <section
-      id="wholesale"
-      aria-labelledby="wholesale-heading"
-      className="relative overflow-hidden bg-ink-950 py-20 text-white sm:py-24"
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-40 right-0 size-[32rem] rounded-full bg-brand-600/20 blur-3xl"
-      />
-      <Container className="relative grid gap-12 lg:grid-cols-12 lg:gap-16">
+    <section id="wholesale" aria-labelledby="wholesale-heading" className="py-16 sm:py-20">
+      <Container className="grid items-center gap-10 lg:grid-cols-12 lg:gap-10">
+        <div className="reveal grid grid-cols-2 gap-2 overflow-hidden rounded-2xl border border-line bg-surface p-2 shadow-soft lg:col-span-4">
+          {collage.map((image) => (
+            <div key={image.src} className="relative aspect-square overflow-hidden rounded-xl bg-white">
+              <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 190px, 45vw" className="object-contain p-2" />
+            </div>
+          ))}
+        </div>
+
         <div className="lg:col-span-5">
           <SectionHeading
             id="wholesale-heading"
-            eyebrow="Wholesale & B2B"
+            eyebrow="B2B & Manufacturing"
             title="Your Manufacturing Partner for Tech Accessories"
             description="Whether you are sourcing products for retail, planning bulk purchases, or exploring a custom product idea, Tech Pouch provides a direct way to discuss your requirements with our team."
             align="left"
-            tone="light"
           />
-          <p className="reveal mt-4 text-sm text-white/60">
-            Pricing is not listed publicly — quantities, specifications and prices are discussed directly with you.
-          </p>
-          <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-start">
-            <ButtonLink href={whatsappUrl(whatsappMessages.wholesale)} external variant="whatsapp" size="lg">
-              <WhatsAppIcon className="size-5" />
+          <div className="reveal mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <ButtonLink href={whatsappUrl(whatsappMessages.wholesale)} external>
+              <WhatsAppIcon className="size-4" />
               Discuss Wholesale Orders
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </ButtonLink>
-            <ButtonLink href={whatsappUrl(whatsappMessages.manufacturingQuote)} external variant="light" size="lg">
+            <ButtonLink href={whatsappUrl(whatsappMessages.manufacturingQuote)} external variant="outline">
+              <FileText className="size-4" aria-hidden="true" />
               Request a Manufacturing Quote
             </ButtonLink>
           </div>
+          <p className="reveal mt-4 text-xs text-ink-500">
+            Prices are not listed publicly — quantities, specifications and pricing are discussed directly with you.
+          </p>
         </div>
 
-        <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
-          {inquiryTypes.map(({ icon: Icon, title, text }, i) => (
-            <li
-              key={title}
-              className={`reveal rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition-colors hover:border-brand-500/50 hover:bg-white/[0.07] ${
-                i === inquiryTypes.length - 1 ? "sm:col-span-2" : ""
-              }`}
-              style={revealDelay(i * 70)}
-            >
-              <Icon className="size-6 text-brand-200" aria-hidden="true" />
-              <h3 className="mt-3 font-semibold">{title}</h3>
-              <p className="mt-1 text-sm text-white/65">{text}</p>
+        <ul className="reveal space-y-1 rounded-2xl border border-line bg-tint/60 p-4 lg:col-span-3">
+          {inquiryTypes.map(({ icon: Icon, title }) => (
+            <li key={title} className="flex items-center gap-3 rounded-xl px-2 py-2.5 text-sm font-medium text-ink-800">
+              <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-white text-brand-600 shadow-soft">
+                <Icon className="size-[18px]" aria-hidden="true" />
+              </span>
+              {title}
             </li>
           ))}
         </ul>

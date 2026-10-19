@@ -45,7 +45,7 @@ export default function AboutPage() {
       <section aria-labelledby="what-we-do" className="py-16 sm:py-20">
         <Container className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="reveal">
-            <h2 id="what-we-do" className="text-2xl font-bold tracking-tight text-ink-900 sm:text-3xl">
+            <h2 id="what-we-do" className="text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl">
               What we do
             </h2>
             <div className="mt-5 space-y-4 leading-relaxed text-ink-700">

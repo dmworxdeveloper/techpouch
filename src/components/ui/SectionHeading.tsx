@@ -31,7 +31,7 @@ export function SectionHeading({
       )}
       <h2
         id={id}
-        className={`text-3xl font-bold tracking-tight text-balance sm:text-4xl ${
+        className={`text-2xl font-semibold tracking-tight text-balance sm:text-3xl lg:text-[2.125rem] lg:leading-tight ${
           tone === "light" ? "text-white" : "text-ink-900"
         }`}
       >

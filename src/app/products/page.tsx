@@ -27,7 +27,7 @@ export default function ProductsPage() {
 
       <section aria-labelledby="main-range" className="py-16 sm:py-20">
         <Container>
-          <h2 id="main-range" className="text-2xl font-bold tracking-tight text-ink-900">
+          <h2 id="main-range" className="text-2xl font-semibold tracking-tight text-ink-900">
             Main product range
           </h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -40,7 +40,7 @@ export default function ProductsPage() {
 
       <section aria-labelledby="repair-range" className="bg-surface py-16 sm:py-20">
         <Container>
-          <h2 id="repair-range" className="text-2xl font-bold tracking-tight text-ink-900">
+          <h2 id="repair-range" className="text-2xl font-semibold tracking-tight text-ink-900">
             Repair accessories
           </h2>
           {secondaryProducts.map((p) => (

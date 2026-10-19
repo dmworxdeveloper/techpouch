@@ -18,7 +18,7 @@ export function PageHeader({
     <section className="border-b border-line bg-gradient-to-b from-brand-50/70 to-white">
       <Container className="py-10 sm:py-14">
         <Breadcrumbs items={crumbs} />
-        <h1 className="mt-6 max-w-3xl animate-fade-up text-3xl font-bold tracking-tight text-balance text-ink-900 sm:text-5xl">
+        <h1 className="mt-6 max-w-3xl animate-fade-up text-3xl font-semibold tracking-tight text-balance text-ink-900 sm:text-5xl">
           {title}
         </h1>
         {lead && (

@@ -5,10 +5,18 @@ import { CopyrightYear } from "./CopyrightYear";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { FacebookIcon, InstagramIcon, YouTubeIcon } from "@/components/icons/SocialIcons";
 import { products, productHref } from "@/lib/products";
-import { mainNav, siteConfig, whatsappMessages, whatsappUrl } from "@/lib/site";
+import { mainNav, siteConfig, socialLinks, whatsappMessages, whatsappUrl } from "@/lib/site";
 
 const quickLinks = [...mainNav.slice(0, 1), { label: "All Products", href: "/products" }, ...mainNav.slice(1)];
+
+/** Only profiles with a configured URL are shown (see socialLinks in src/lib/site.ts). */
+const socials = [
+  { label: "Facebook", href: socialLinks.facebook, icon: FacebookIcon },
+  { label: "Instagram", href: socialLinks.instagram, icon: InstagramIcon },
+  { label: "YouTube", href: socialLinks.youtube, icon: YouTubeIcon },
+].filter((s) => s.href);
 
 const linkClass =
   "inline-flex min-h-9 items-center text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-brand-200";
@@ -16,24 +24,15 @@ const linkClass =
 export function Footer() {
   const { contact } = siteConfig;
   return (
-    <footer className="bg-ink-950 text-white" aria-labelledby="footer-heading">
+    <footer className="bg-navy-900 text-white" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <Container className="py-14 lg:py-16">
+      <Container className="py-12 lg:py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Logo tone="light" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">{siteConfig.tagline}</p>
-            <ButtonLink
-              href={whatsappUrl(whatsappMessages.general)}
-              external
-              variant="whatsapp"
-              className="mt-6"
-            >
-              <WhatsAppIcon className="size-4" />
-              Chat on WhatsApp
-            </ButtonLink>
           </div>
 
           <nav aria-label="Quick links" className="lg:col-span-2">
@@ -77,33 +76,45 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href={whatsappUrl(whatsappMessages.general)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${linkClass} gap-2`}
-                >
-                  <WhatsAppIcon className="size-4 shrink-0" />
-                  WhatsApp: {contact.phoneDisplay}
-                </a>
-              </li>
-              <li>
                 <a href={`mailto:${contact.email}`} className={`${linkClass} gap-2 break-all`}>
                   <Mail className="size-4 shrink-0" aria-hidden="true" />
                   {contact.email}
                 </a>
               </li>
             </ul>
+            <ButtonLink href={whatsappUrl(whatsappMessages.general)} external className="mt-4">
+              <WhatsAppIcon className="size-4" />
+              Chat on WhatsApp
+            </ButtonLink>
+            {socials.length > 0 && (
+              <ul className="mt-5 flex gap-2" aria-label="Social media">
+                {socials.map(({ label, href, icon: Icon }) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Tech Pouch on ${label}`}
+                      className="grid size-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-brand-600"
+                    >
+                      <Icon className="size-[18px]" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
+      </Container>
 
-        {/* Extra bottom padding keeps the floating WhatsApp button clear of footer text on small screens. */}
-        <div className="mt-12 border-t border-white/10 pt-6 pb-16 text-sm text-white/60 sm:pb-0">
+      {/* Extra bottom padding keeps the floating WhatsApp button clear of the text on small screens. */}
+      <div className="border-t border-white/10 bg-black/15">
+        <Container className="pt-5 pb-20 text-sm text-white/60 sm:pb-5">
           <p>
             © <CopyrightYear /> {siteConfig.name}. All rights reserved.
           </p>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </footer>
   );
 }

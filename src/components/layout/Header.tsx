@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
+import { SearchDialog } from "./SearchDialog";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Container } from "@/components/ui/Container";
@@ -14,8 +15,18 @@ import { mainNav, whatsappMessages, whatsappUrl } from "@/lib/site";
 /** Top-level links shown after the Products menu. */
 const pageLinks = mainNav.filter((item) => item.href !== "/");
 
-const linkBase =
-  "inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-brand-500";
+/** Desktop links fill the header height so the active underline sits on its bottom edge. */
+const desktopLink = (active: boolean) =>
+  `relative inline-flex h-full items-center gap-1 px-3 text-sm font-medium transition-colors after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:transition-transform after:duration-200 focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-brand-500 ${
+    active
+      ? "text-brand-600 after:scale-x-100 after:bg-brand-600"
+      : "text-ink-700 after:scale-x-0 after:bg-brand-600 hover:text-ink-900 hover:after:scale-x-100"
+  }`;
+
+const mobileLink = (active: boolean) =>
+  `flex min-h-11 w-full items-center rounded-lg px-3 text-base font-medium transition-colors ${
+    active ? "bg-brand-50 text-brand-600" : "text-ink-700 hover:bg-surface hover:text-ink-900"
+  }`;
 
 export function Header() {
   const pathname = usePathname();
@@ -59,37 +70,32 @@ export function Header() {
   };
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
-  const productsActive = pathname.startsWith("/products");
-  const navClass = (active: boolean) =>
-    `${linkBase} ${active ? "text-brand-600" : "text-ink-700 hover:bg-surface hover:text-ink-900"}`;
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b transition-[background-color,box-shadow,border-color] duration-300 ${
-        scrolled || mobileOpen
-          ? "border-line bg-white/95 shadow-soft backdrop-blur"
-          : "border-transparent bg-white/80 backdrop-blur"
+      className={`sticky top-0 z-40 border-b bg-white/95 backdrop-blur transition-shadow duration-300 ${
+        scrolled || mobileOpen ? "border-line shadow-soft" : "border-line/70"
       }`}
     >
       <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
         <Logo onClick={closeAll} />
 
-        <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
-            <li>
-              <Link href="/" className={navClass(isActive("/"))} aria-current={pathname === "/" ? "page" : undefined}>
+        <nav aria-label="Main" className="hidden h-full lg:block">
+          <ul className="flex h-full items-center gap-2">
+            <li className="h-full">
+              <Link href="/" className={desktopLink(isActive("/"))} aria-current={pathname === "/" ? "page" : undefined}>
                 Home
               </Link>
             </li>
             <li
               ref={productsRef}
-              className="relative"
+              className="relative h-full"
               onMouseEnter={() => setProductsOpen(true)}
               onMouseLeave={() => setProductsOpen(false)}
             >
               <button
                 type="button"
-                className={`${navClass(productsActive)} gap-1`}
+                className={desktopLink(pathname.startsWith("/products"))}
                 aria-expanded={productsOpen}
                 aria-controls={productsMenuId}
                 onClick={() => setProductsOpen((v) => !v)}
@@ -150,10 +156,10 @@ export function Header() {
               </div>
             </li>
             {pageLinks.map((item) => (
-              <li key={item.href}>
+              <li key={item.href} className="h-full">
                 <Link
                   href={item.href}
-                  className={navClass(isActive(item.href))}
+                  className={desktopLink(isActive(item.href))}
                   aria-current={isActive(item.href) ? "page" : undefined}
                 >
                   {item.label}
@@ -163,15 +169,16 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <SearchDialog />
           <ButtonLink
             href={whatsappUrl(whatsappMessages.general)}
             external
-            className="px-3 sm:px-4"
-            aria-label="Get a quote on WhatsApp (opens in a new tab)"
+            className="max-sm:hidden"
+            aria-label="Chat on WhatsApp (opens in a new tab)"
           >
             <WhatsAppIcon className="size-4" />
-            Get a Quote
+            Chat on WhatsApp
           </ButtonLink>
           <button
             type="button"
@@ -195,16 +202,12 @@ export function Header() {
           <nav aria-label="Mobile">
             <ul className="space-y-1">
               <li>
-                <Link href="/" onClick={closeAll} className={`${navClass(isActive("/"))} w-full text-base`}>
+                <Link href="/" onClick={closeAll} className={mobileLink(isActive("/"))}>
                   Home
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/products"
-                  onClick={closeAll}
-                  className={`${navClass(pathname === "/products")} w-full text-base`}
-                >
+                <Link href="/products" onClick={closeAll} className={mobileLink(pathname === "/products")}>
                   Products
                 </Link>
                 <ul className="ml-3 border-l border-line pl-3">
@@ -213,7 +216,7 @@ export function Header() {
                       <Link
                         href={productHref(p.slug)}
                         onClick={closeAll}
-                        className={`${navClass(pathname === productHref(p.slug))} w-full`}
+                        className={`${mobileLink(pathname === productHref(p.slug))} text-sm`}
                       >
                         {p.name}
                       </Link>
@@ -223,7 +226,7 @@ export function Header() {
               </li>
               {pageLinks.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} onClick={closeAll} className={`${navClass(isActive(item.href))} w-full text-base`}>
+                  <Link href={item.href} onClick={closeAll} className={mobileLink(isActive(item.href))}>
                     {item.label}
                   </Link>
                 </li>
@@ -238,7 +241,7 @@ export function Header() {
             className="mt-4 w-full"
           >
             <WhatsAppIcon className="size-5" />
-            Get a Quote on WhatsApp
+            Chat on WhatsApp
           </ButtonLink>
         </Container>
       </div>

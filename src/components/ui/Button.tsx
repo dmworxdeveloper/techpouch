@@ -1,15 +1,16 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "whatsapp" | "ghost" | "light";
+type Variant = "primary" | "secondary" | "outline" | "whatsapp" | "ghost" | "light";
 type Size = "md" | "lg";
 
 const base =
-  "group inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60";
+  "group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
   primary: "bg-brand-600 text-white shadow-soft hover:bg-brand-700 hover:shadow-lift",
   secondary: "border border-line bg-white text-ink-900 hover:border-ink-900/25 hover:bg-surface",
+  outline: "border border-brand-600 bg-white text-brand-600 hover:bg-brand-50",
   whatsapp: "bg-whatsapp text-ink-950 shadow-soft hover:bg-whatsapp-dark hover:text-white",
   ghost: "text-brand-600 hover:text-brand-700",
   light: "bg-white text-ink-900 hover:bg-brand-50",

@@ -1,99 +1,98 @@
-import { Building2, ShoppingBag, type LucideIcon } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Building2, ShoppingBag, type LucideIcon } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { getProduct } from "@/lib/products";
 import { whatsappMessages, whatsappUrl } from "@/lib/site";
 import { revealDelay } from "@/lib/reveal";
 
 type OrderPath = {
   icon: LucideIcon;
   title: string;
-  audience: string;
   steps: string[];
   cta: string;
   message: string;
-  featured?: boolean;
+  variant: "primary" | "outline";
 };
 
 const paths: OrderPath[] = [
   {
     icon: ShoppingBag,
-    title: "Retail Customers",
-    audience: "Buying for yourself — single pieces welcome.",
+    title: "For Retail Customers",
     steps: [
       "Explore available products.",
       "Ask about product availability and specifications.",
       "Confirm the order through the available ordering process.",
     ],
-    cta: "Ask About a Retail Order",
+    cta: "Chat on WhatsApp",
     message: whatsappMessages.retail,
+    variant: "primary",
   },
   {
     icon: Building2,
-    title: "Wholesale Customers",
-    audience: "Retailers, distributors, resellers and businesses.",
+    title: "For Wholesale Customers",
     steps: [
       "Select the product category.",
       "Share required quantities and specifications.",
       "Discuss wholesale pricing and order details directly with Tech Pouch.",
     ],
-    cta: "Start a Wholesale Inquiry",
+    cta: "Inquire on WhatsApp",
     message: whatsappMessages.wholesale,
-    featured: true,
+    variant: "outline",
   },
 ];
 
+const sideImage = getProduct("universal-tablet-covers")!.image;
+
 export function HowToOrder() {
   return (
-    <section id="how-to-order" aria-labelledby="order-heading" className="py-20 sm:py-24">
-      <Container>
-        <SectionHeading
-          id="order-heading"
-          eyebrow="How to order"
-          title="Simple Ordering for Retail and Wholesale"
-          description="Orders are currently arranged directly with our team. We will confirm availability, payment and delivery options with you before anything is finalised."
-        />
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {paths.map(({ icon: Icon, title, audience, steps, cta, message, featured }, i) => (
+    <section id="how-to-order" aria-labelledby="order-heading" className="bg-tint py-16 sm:py-20">
+      <Container className="grid items-center gap-10 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <h2 id="order-heading" className="reveal text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl lg:text-[2.125rem]">
+            How to Order
+          </h2>
+          <p className="reveal mt-3 text-ink-600">
+            Orders are arranged directly with our team. We confirm availability, payment and delivery options with
+            you before anything is finalised.
+          </p>
+          <div className="reveal relative mt-6 hidden aspect-[4/3] overflow-hidden rounded-2xl shadow-lift sm:block">
+            <Image src={sideImage.src} alt={sideImage.alt} fill sizes="(min-width: 1024px) 380px, 90vw" className="object-cover" />
+          </div>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:col-span-8">
+          {paths.map(({ icon: Icon, title, steps, cta, message, variant }, i) => (
             <article
               key={title}
-              className={`reveal flex flex-col rounded-3xl border p-6 sm:p-8 ${
-                featured ? "border-brand-200 bg-brand-50/60" : "border-line bg-white"
-              }`}
+              className="reveal flex flex-col rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-7"
               style={revealDelay(i * 100)}
             >
               <div className="flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-xl bg-white text-brand-600 shadow-soft">
+                <span className="grid size-10 place-items-center rounded-xl bg-brand-50 text-brand-600">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
-                <div>
-                  <h3 className="text-xl font-semibold text-ink-900">{title}</h3>
-                  <p className="text-sm text-ink-600">{audience}</p>
-                </div>
+                <h3 className="text-lg font-semibold text-ink-900">{title}</h3>
               </div>
-              <ol className="mt-6 space-y-4">
+              <ol className="mt-5 space-y-3">
                 {steps.map((step, n) => (
-                  <li key={step} className="flex gap-4">
+                  <li key={step} className="flex gap-3 text-sm text-ink-700">
                     <span
-                      className="grid size-8 shrink-0 place-items-center rounded-full border border-brand-200 bg-white text-sm font-semibold text-brand-700"
+                      className="grid size-6 shrink-0 place-items-center rounded-full bg-brand-600 text-xs font-semibold text-white"
                       aria-hidden="true"
                     >
                       {n + 1}
                     </span>
-                    <span className="pt-1 text-ink-700">{step}</span>
+                    <span className="pt-0.5">{step}</span>
                   </li>
                 ))}
               </ol>
-              <div className="mt-auto pt-8">
-                <ButtonLink
-                  href={whatsappUrl(message)}
-                  external
-                  variant={featured ? "primary" : "secondary"}
-                  className="w-full sm:w-auto"
-                >
-                  <WhatsAppIcon className={`size-4 ${featured ? "" : "text-whatsapp-dark"}`} />
+              <div className="mt-auto pt-7">
+                <ButtonLink href={whatsappUrl(message)} external variant={variant}>
+                  <WhatsAppIcon className="size-4" />
                   {cta}
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                 </ButtonLink>
               </div>
             </article>

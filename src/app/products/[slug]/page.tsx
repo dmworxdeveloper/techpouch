@@ -86,7 +86,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
           </div>
 
           <div>
-            <h2 id="details-heading" className="text-2xl font-bold tracking-tight text-ink-900">
+            <h2 id="details-heading" className="text-2xl font-semibold tracking-tight text-ink-900">
               Product details
             </h2>
             <ul className="mt-5 space-y-3">
@@ -157,7 +157,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
       {related.length > 0 && (
         <section aria-labelledby="related-heading" className="bg-surface py-16 sm:py-20">
           <Container>
-            <h2 id="related-heading" className="text-2xl font-bold tracking-tight text-ink-900">
+            <h2 id="related-heading" className="text-2xl font-semibold tracking-tight text-ink-900">
               Other Tech Pouch products
             </h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

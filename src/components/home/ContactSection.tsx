@@ -5,12 +5,11 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function ContactSection() {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="bg-surface py-20 sm:py-24">
-      <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+    <section id="contact" aria-labelledby="contact-heading" className="py-16 sm:py-20">
+      <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
           <SectionHeading
             id="contact-heading"
-            eyebrow="Contact"
             title="Let's Talk About Your Requirements"
             description="Contact Tech Pouch for product information, wholesale inquiries, and custom manufacturing discussions."
             align="left"
@@ -19,9 +18,8 @@ export function ContactSection() {
             <ContactDetails />
           </div>
         </div>
-        <div className="reveal rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-8 lg:col-span-7">
-          <h3 className="text-xl font-semibold text-ink-900">Send an inquiry</h3>
-          <p className="mt-1 mb-6 text-sm text-ink-600">Fields marked * are required.</p>
+        <div className="reveal rounded-2xl border border-line bg-white p-5 shadow-soft sm:p-7 lg:col-span-7">
+          <h3 className="sr-only">Send an inquiry</h3>
           <ContactForm />
         </div>
       </Container>

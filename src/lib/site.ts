@@ -58,6 +58,16 @@ export function absoluteUrl(path = "/"): string {
   return `${siteConfig.url}${path === "/" ? "" : path}`;
 }
 
+/**
+ * Social profiles shown in the footer. Leave a value empty to hide its icon —
+ * only add real profile URLs so the footer never links to a missing page.
+ */
+export const socialLinks = {
+  facebook: "",
+  instagram: "",
+  youtube: "",
+} as const;
+
 export type NavLink = { label: string; href: string };
 
 export const mainNav: NavLink[] = [

@@ -22,7 +22,7 @@ export default function ContactPage() {
       <section aria-labelledby="contact-options" className="py-14 sm:py-20">
         <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <h2 id="contact-options" className="text-2xl font-bold tracking-tight text-ink-900">
+            <h2 id="contact-options" className="text-2xl font-semibold tracking-tight text-ink-900">
               Reach our team
             </h2>
             <p className="mt-2 mb-6 text-ink-600">

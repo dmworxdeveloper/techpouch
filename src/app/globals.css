@@ -2,6 +2,8 @@
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-poppins), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-caveat), "Segoe Print", cursive;
 
   /* Deep navy / charcoal text scale */
   --color-ink-950: #0a1426;
@@ -15,11 +17,18 @@
   --color-brand-50: #eef4ff;
   --color-brand-100: #dbe7ff;
   --color-brand-200: #bdd3ff;
+  --color-brand-300: #8fb2ff;
   --color-brand-500: #2f6bff;
   --color-brand-600: #1f55f0;
   --color-brand-700: #1843c4;
 
+  /* Deep blue used for the custom manufacturing band and footer */
+  --color-navy-900: #0b1f3f;
+  --color-navy-800: #12305c;
+  --color-navy-700: #1a3f75;
+
   --color-surface: #f6f8fb;
+  --color-tint: #eef3fb;
   --color-line: #e3e8f0;
 
   --color-whatsapp: #25d366;
@@ -62,6 +71,12 @@ html {
 body {
   background: #ffffff;
   color: var(--color-ink-900);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
 }
 
 /* Scroll-reveal: content is visible by default; hidden only when JS has enabled reveals. */

@@ -51,7 +51,7 @@ function composeMessage(f: Fields): string {
 }
 
 const fieldClass =
-  "mt-1.5 block w-full rounded-xl border bg-white px-3.5 py-2.5 text-base text-ink-900 shadow-sm transition placeholder:text-ink-500/70 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 focus:outline-none sm:text-sm";
+  "mt-1.5 block w-full rounded-lg border bg-white px-3.5 py-2.5 text-base text-ink-900 shadow-sm transition placeholder:text-ink-500/70 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 focus:outline-none sm:text-sm";
 
 export function ContactForm({ defaultInquiryType = "" }: { defaultInquiryType?: string }) {
   const id = useId();
@@ -104,8 +104,8 @@ export function ContactForm({ defaultInquiryType = "" }: { defaultInquiryType?: 
     ) : null;
 
   return (
-    <form noValidate onSubmit={handleSubmit} className="space-y-5" aria-describedby={`${id}-note`}>
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form noValidate onSubmit={handleSubmit} className="space-y-4" aria-describedby={`${id}-note`}>
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor={`${id}-name`} className="text-sm font-medium text-ink-800">
             Full Name <span className="text-red-600" aria-hidden="true">*</span>
@@ -195,7 +195,7 @@ export function ContactForm({ defaultInquiryType = "" }: { defaultInquiryType?: 
         <textarea
           id={`${id}-message`}
           name="message"
-          rows={5}
+          rows={4}
           required
           value={fields.message}
           onChange={update("message")}
@@ -207,23 +207,24 @@ export function ContactForm({ defaultInquiryType = "" }: { defaultInquiryType?: 
         {errorText("message")}
       </div>
 
-      <p id={`${id}-note`} className="flex gap-2 rounded-xl bg-surface p-3 text-sm text-ink-600">
-        <Info className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden="true" />
-        <span>
-          Choosing a button opens WhatsApp or your email app with your inquiry filled in. Your message is
-          only sent when you press send there.
-        </span>
-      </p>
-
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <button type="submit" value="whatsapp" className={buttonClasses("whatsapp", "lg", "flex-1")}>
-          <WhatsAppIcon className="size-5" />
-          Continue on WhatsApp
-        </button>
-        <button type="submit" value="email" className={buttonClasses("secondary", "lg", "flex-1")}>
-          <Mail className="size-5" aria-hidden="true" />
-          Continue by Email
-        </button>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p id={`${id}-note`} className="flex gap-2 text-xs leading-relaxed text-ink-500 sm:max-w-xs">
+          <Info className="mt-0.5 size-3.5 shrink-0 text-brand-600" aria-hidden="true" />
+          <span>
+            Opens WhatsApp or your email app with your inquiry filled in — it is only sent when you press send
+            there.
+          </span>
+        </p>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <button type="submit" value="whatsapp" className={buttonClasses("primary", "md")}>
+            <WhatsAppIcon className="size-4" />
+            Send via WhatsApp
+          </button>
+          <button type="submit" value="email" className={buttonClasses("secondary", "md")}>
+            <Mail className="size-4" aria-hidden="true" />
+            Send by Email
+          </button>
+        </div>
       </div>
 
       <p role="status" aria-live="polite" className="text-sm text-ink-700 empty:hidden">
