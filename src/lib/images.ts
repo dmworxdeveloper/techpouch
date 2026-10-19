@@ -27,6 +27,12 @@ export const b2bCollageImages = [
   { src: "/images/products/zipper-tablet-covers/zipper-tablet-cover-pink.webp", alt: "Pink zipper tablet cover sleeve shown upright" },
 ];
 
+/** Photo beside "How to Order" on the homepage. */
+export const howToOrderImage = {
+  src: "/images/products/universal-tablet-covers/universal-tablet-cover-red.webp",
+  alt: "Red universal tablet cover with a rotating clasp, standing upright",
+};
+
 export const customBandImages = {
   zipper: heroImages.zipper,
   universal: heroImages.universal,

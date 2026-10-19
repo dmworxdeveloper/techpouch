@@ -3,7 +3,7 @@ import { ArrowRight, Building2, ShoppingBag, type LucideIcon } from "lucide-reac
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { getCategoryById } from "@/lib/catalog";
+import { howToOrderImage } from "@/lib/images";
 import { whatsappMessages, whatsappUrl } from "@/lib/site";
 import { revealDelay } from "@/lib/reveal";
 
@@ -43,7 +43,7 @@ const paths: OrderPath[] = [
   },
 ];
 
-const sideImage = getCategoryById("universal-tablet-covers")!.image;
+const sideImage = howToOrderImage;
 
 export function HowToOrder() {
   return (
