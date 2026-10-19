@@ -51,6 +51,7 @@ src/components/       layout (Header, Footer, FloatingWhatsApp, PageHeader, CtaB
                       ui (Button, FaqAccordion, StatusMessage, …), home (homepage sections)
 public/images/products/<category>/   product photos
 public/images/cutouts/               transparent product cut-outs used in decorative compositions
+public/brand/                        logo (dark + light versions) and monogram; favicon in src/app/icon.png
 ```
 
 ## Adding a product or category

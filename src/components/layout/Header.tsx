@@ -78,7 +78,7 @@ export function Header() {
       }`}
     >
       <Container className="flex h-16 items-center justify-between gap-4 xl:h-[4.5rem]">
-        <Logo onClick={closeAll} />
+        <Logo onClick={closeAll} priority />
 
         <nav aria-label="Main" className="hidden h-full xl:block">
           <ul className="flex h-full items-center gap-1">

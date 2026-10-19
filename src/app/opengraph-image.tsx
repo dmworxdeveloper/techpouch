@@ -1,8 +1,13 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt = "Tech Pouch — tablet covers, mouse pads and custom manufacturing";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+const logoData = await readFile(join(process.cwd(), "public/brand/tech-pouch-logo-light.png"), "base64");
+const logoSrc = `data:image/png;base64,${logoData}`;
 
 /** Default social-sharing image for pages without their own. */
 export default function OpenGraphImage() {
@@ -16,34 +21,15 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "#0a1426",
+          background: "#0b1f3f",
           color: "#ffffff",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div
-            style={{
-              width: 72,
-              height: 72,
-              borderRadius: 18,
-              background: "#1f55f0",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 32,
-              fontWeight: 800,
-            }}
-          >
-            TP
-          </div>
-          <div style={{ fontSize: 40, fontWeight: 700 }}>Tech Pouch</div>
-        </div>
+        <img src={logoSrc} width={466} height={84} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 68, fontWeight: 800, lineHeight: 1.1 }}>Precision-Made Accessories.</div>
-          <div style={{ fontSize: 68, fontWeight: 800, lineHeight: 1.1, color: "#7fa4ff" }}>
-            Built for Your Brand.
-          </div>
+          <div style={{ fontSize: 68, fontWeight: 800, lineHeight: 1.1 }}>Quality Tech Accessories</div>
+          <div style={{ fontSize: 68, fontWeight: 800, lineHeight: 1.1, color: "#5b8dff" }}>for Every Need</div>
         </div>
         <div style={{ fontSize: 28, color: "rgba(255,255,255,0.7)" }}>
           Tablet Covers • Mouse Pads • Wholesale Supply • Custom Manufacturing
