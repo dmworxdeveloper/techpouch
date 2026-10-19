@@ -46,6 +46,7 @@ export const products: Product[] = [
       "Hello Tech Pouch, I want to order a zipper tablet cover for {price}. I am located in {city}. Please confirm my order and delivery details.",
     images: [
       productImage("zipper-tablet-covers", "zipper-tablet-cover-black", "Black zipper tablet cover sleeve with a metal zip pull", { width: 1024, height: 1024 }),
+      productImage("zipper-tablet-covers", "zipper-tablet-cover-black-printed-character", "Black zipper tablet cover printed with a brown furry cartoon character", { width: 1024, height: 1024 }),
       productImage("zipper-tablet-covers", "zipper-tablet-covers-colours", "Pink zipper tablet cover with smaller views of teal, black and pink covers", { width: 500, height: 500 }),
       productImage("zipper-tablet-covers", "zipper-tablet-cover-teal", "Teal zipper tablet cover standing upright", { width: 425, height: 707 }),
       productImage("zipper-tablet-covers", "zipper-tablet-cover-pink", "Light pink zipper tablet cover sleeve", { width: 1024, height: 1024 }),
@@ -124,6 +125,7 @@ export const products: Product[] = [
       "Hello Tech Pouch, I want to order a wrist-rest mouse pad for {price}. Please confirm delivery charges and the total payable amount.",
     images: [
       productImage("mouse-pads", "wrist-rest-mouse-pads-assorted", "Four wrist-rest mouse pads in black, pink, blue and orange", { width: 1000, height: 1000 }),
+      productImage("mouse-pads", "wrist-rest-mouse-pad-black-ergonomic", "Black ergonomic mouse pad with a raised wrist rest", { width: 1035, height: 1200 }),
       productImage("mouse-pads", "wrist-rest-mouse-pad-teal", "Teal mouse pad with a built-in wrist rest", { width: 1200, height: 1200 }),
       productImage("mouse-pads", "wrist-rest-mouse-pad-black", "Black wrist-rest mouse pad with a white mouse", { width: 960, height: 700 }),
       productImage("mouse-pads", "wrist-rest-mouse-pads-stack", "Stack of wrist-rest mouse pads in blue, purple, teal, red and black", { width: 320, height: 320 }),
