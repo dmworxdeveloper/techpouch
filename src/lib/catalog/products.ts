@@ -184,6 +184,7 @@ export const products: Product[] = [
       "Ear pads come in different shapes and sizes, so please share your headphone brand and model when you inquire. Our team will confirm whether a suitable replacement is available.",
     ],
     images: [
+      productImage("headphone-leather-repair", "headphone-ear-pads-mesh", "Pair of black padded headphone ear pads", { width: 1200, height: 1200 }),
       productImage("headphone-leather-repair", "headphone-ear-pads-leather", "Pair of round black leather headphone ear pads", { width: 960, height: 960 }),
       productImage("headphone-leather-repair", "headphone-ear-pads-oval", "Pair of oval black leather headphone ear pads", { width: 1040, height: 736 }),
       productImage("headphone-leather-repair", "headphone-ear-pads-round", "Pair of round black padded headphone ear pads", { width: 320, height: 320 }),
