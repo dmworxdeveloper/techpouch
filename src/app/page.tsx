@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { ProductCategories } from "@/components/home/ProductCategories";
 import { FeatureStrip } from "@/components/home/FeatureStrip";
+import { MarketExperience } from "@/components/home/MarketExperience";
 import { Wholesale } from "@/components/home/Wholesale";
 import { CustomManufacturing } from "@/components/home/CustomManufacturing";
 import { WhyChoose } from "@/components/home/WhyChoose";
@@ -55,6 +56,7 @@ export default function HomePage() {
       <Hero />
       <ProductCategories />
       <FeatureStrip />
+      <MarketExperience />
       <Wholesale />
       <CustomManufacturing />
       <WhyChoose />
