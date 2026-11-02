@@ -36,7 +36,7 @@ export function Logo({
         priority={priority}
         unoptimized={LOGO.dark.startsWith("http") && tone === "dark"}
         sizes="(min-width: 640px) 220px, 180px"
-        className="h-8 w-auto transition-opacity duration-200 group-hover:opacity-85 sm:h-9"
+        className="h-9 w-auto transition-opacity duration-200 group-hover:opacity-85 sm:h-10"
       />
     </Link>
   );
