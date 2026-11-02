@@ -46,6 +46,7 @@ export function ProductImage({
         fill
         sizes={sizes}
         priority={priority}
+        unoptimized={image.src.startsWith("http")}
         className="object-contain p-4 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
       />
     </div>

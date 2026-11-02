@@ -85,6 +85,31 @@ export const categories: Category[] = [
     },
   },
   {
+    id: "mens-accessories",
+    slug: "mens-accessories",
+    name: "Men's Accessories",
+    placement: "catalog",
+    href: "/products/mens-accessories",
+    summary: "Refined everyday accessories designed for practical storage and polished carry.",
+    description:
+      "Explore practical men's accessories from Tech Pouch, including elegant hand pouches designed for everyday usability and easy organization.",
+    cardCta: "Explore Men's Accessories",
+    image: {
+      src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/menpouch1-BecjKvJGuWWjKfgdttYWeqbbuCJZSF.jpg",
+      alt: "Black patterned men's hand pouch with wrist strap",
+      width: 447,
+      height: 447,
+    },
+    status: "published",
+    faqIds: ["pricing", "delivery", "single-piece", "wholesale"],
+    inquiryMessage: "Hello Tech Pouch, I would like to inquire about your men's accessories.",
+    seo: {
+      title: "Men's Accessories — Tech Pouch",
+      description:
+        "Shop refined men's accessories from Tech Pouch, including the Men's Hand Pouch for elegant everyday storage and practical carry.",
+    },
+  },
+  {
     id: "headphone-leather-repair",
     slug: "headphone-leather-repair",
     name: "Headphone Leather Repair Accessories",
