@@ -22,7 +22,7 @@ export function PageHeader({
   compact?: boolean;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-[linear-gradient(115deg,#f4f7fc_0%,#eef2f8_45%,#e6ecf5_100%)]">
+    <section className="relative overflow-hidden border-b border-line bg-[linear-gradient(115deg,#f5f0e7_0%,#f5f0e7_45%,#eee4d2_100%)]">
       <Container className={`${compact ? "py-8 sm:py-10" : "py-10 sm:py-14"} ${aside ? "grid items-center gap-10 lg:grid-cols-12" : ""}`}>
         <div className={aside ? "lg:col-span-7" : ""}>
           <Breadcrumbs items={crumbs} />

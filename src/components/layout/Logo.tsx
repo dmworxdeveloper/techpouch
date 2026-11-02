@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 /**
- * Official Tech Pouch logo (public/brand). The light version has white "Tech"
- * lettering for dark backgrounds such as the footer.
+ * The supplied tan monogram wordmark is used on light surfaces. The light
+ * version remains available for dark backgrounds such as the footer.
  */
 const LOGO = {
-  dark: "/brand/tech-pouch-logo.png",
+  dark: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Tech%20Pouch%20Tan%20Monogram%20Logo-rKv4QC9pN06wAYx4d9zb6Pp5XHwkFE.png",
   light: "/brand/tech-pouch-logo-light.png",
-  width: 1398,
-  height: 252,
+  width: 2048,
+  height: 683,
 };
 
 export function Logo({
@@ -34,8 +34,9 @@ export function Logo({
         width={LOGO.width}
         height={LOGO.height}
         priority={priority}
+        unoptimized={LOGO.dark.startsWith("http") && tone === "dark"}
         sizes="(min-width: 640px) 220px, 180px"
-        className="h-8 w-auto transition-opacity duration-200 group-hover:opacity-85 sm:h-9"
+        className="h-9 w-auto transition-opacity duration-200 group-hover:opacity-85 sm:h-10"
       />
     </Link>
   );

@@ -54,7 +54,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative overflow-hidden bg-[linear-gradient(115deg,#f4f7fc_0%,#eef2f8_45%,#e6ecf5_100%)]"
+      className="relative overflow-hidden bg-[linear-gradient(115deg,#f5f0e7_0%,#f5f0e7_45%,#eee4d2_100%)]"
     >
       <div
         aria-hidden="true"

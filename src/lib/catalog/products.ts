@@ -172,6 +172,52 @@ export const products: Product[] = [
     },
   },
   {
+    id: "mens-hand-pouch",
+    slug: "mens-hand-pouch",
+    categoryId: "mens-accessories",
+    name: "Men's Hand Pouch",
+    status: "published",
+    shortDescription:
+      "An elegant black hand pouch with a refined pattern, practical storage, and a wrist strap for everyday carry.",
+    description: [
+      "Designed for a polished everyday carry, the Men's Hand Pouch pairs a sophisticated black patterned exterior with a compact, easy-to-carry silhouette.",
+      "Its practical interior keeps small essentials organized while the wrist strap makes it comfortable to carry from day to night. Request current pricing and availability from our team, or ask about bulk orders for your business.",
+    ],
+    images: [
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/menpouch1-BecjKvJGuWWjKfgdttYWeqbbuCJZSF.jpg",
+        alt: "Black patterned men's hand pouch with wrist strap",
+        width: 447,
+        height: 447,
+        design: "Black",
+      },
+    ],
+    variants: [{ label: "Colour", options: ["Black"] }],
+    orderMessage:
+      "Hello Tech Pouch, I am interested in the Men's Hand Pouch in black. Please share the current price, availability, and delivery details.",
+    inquiryMessage:
+      "Hello Tech Pouch, I would like pricing and availability for the Men's Hand Pouch in black. Please also share your wholesale and bulk order options.",
+    features: [
+      "Elegant black patterned exterior",
+      "Compact storage for everyday essentials",
+      "Wrist strap for convenient carry",
+      "Available for retail and wholesale inquiries",
+    ],
+    specifications: [
+      { label: "Category", value: "Men's Accessories" },
+      { label: "Colour", value: "Black" },
+      { label: "Closure", value: "Zip closure" },
+      { label: "Carry style", value: "Wrist strap" },
+      { label: "Pricing", value: "Confirmed on inquiry" },
+    ],
+    faqIds: ["pricing", "delivery", "single-piece", "wholesale", "cod"],
+    seo: {
+      title: "Men's Hand Pouch — Black",
+      description:
+        "Men's Hand Pouch in black from Tech Pouch, designed for elegant everyday storage. Request retail pricing or a wholesale quote.",
+    },
+  },
+  {
     id: "replacement-leather-ear-pads",
     slug: "replacement-leather-ear-pads",
     categoryId: "headphone-leather-repair",

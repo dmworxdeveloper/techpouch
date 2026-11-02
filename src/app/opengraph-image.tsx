@@ -21,15 +21,15 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "#0b1f3f",
-          color: "#ffffff",
+          background: "#17110D",
+          color: "#f5f0e7",
           fontFamily: "sans-serif",
         }}
       >
         <img src={logoSrc} width={466} height={84} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.1 }}>Tech Accessories Manufacturer</div>
-          <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.1, color: "#5b8dff" }}>for Retail &amp; Wholesale</div>
+          <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.1, color: "#C5A46D" }}>for Retail &amp; Wholesale</div>
         </div>
         <div style={{ fontSize: 28, color: "rgba(255,255,255,0.7)" }}>
           Tablet Covers • Mouse Pads • Wholesale Supply • Custom Manufacturing

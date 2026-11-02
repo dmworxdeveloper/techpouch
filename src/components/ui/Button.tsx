@@ -8,11 +8,11 @@ const base =
   "group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-brand-600 text-white shadow-soft hover:bg-brand-700 hover:shadow-lift",
-  secondary: "border border-line bg-white text-ink-900 hover:border-ink-900/25 hover:bg-surface",
-  outline: "border border-brand-600 bg-white text-brand-600 hover:bg-brand-50",
-  whatsapp: "bg-whatsapp text-ink-950 shadow-soft hover:bg-whatsapp-dark hover:text-white",
-  ghost: "text-brand-600 hover:text-brand-700",
+  primary: "bg-brand-600 text-white shadow-soft hover:bg-brand-500 hover:text-ink-950 hover:shadow-lift",
+  secondary: "border border-brand-300 bg-transparent text-ink-800 hover:border-brand-500 hover:bg-brand-600 hover:text-white",
+  outline: "border border-brand-500 bg-transparent text-ink-800 hover:bg-brand-600 hover:text-white",
+  whatsapp: "bg-brand-600 text-white shadow-soft hover:bg-brand-500 hover:text-ink-950",
+  ghost: "text-brand-600 hover:text-brand-500",
   light: "bg-white text-ink-900 hover:bg-brand-50",
 };
 
