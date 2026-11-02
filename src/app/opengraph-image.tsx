@@ -22,7 +22,7 @@ export default function OpenGraphImage() {
           justifyContent: "space-between",
           padding: 72,
           background: "#17110D",
-          color: "#ffffff",
+          color: "#f5f0e7",
           fontFamily: "sans-serif",
         }}
       >
