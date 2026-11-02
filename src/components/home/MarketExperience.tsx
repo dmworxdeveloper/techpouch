@@ -33,7 +33,7 @@ export function MarketExperience() {
       />
       <Container className="relative grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
-          <p className="reveal text-sm font-semibold tracking-wide text-[#e0c084] uppercase">
+          <p className="reveal text-sm font-semibold tracking-wide text-brand-300 uppercase">
             20 years of market experience
           </p>
           <h2
@@ -48,13 +48,13 @@ export function MarketExperience() {
             relationships in Karachi.
           </p>
 
-          <div className="reveal mt-8 flex items-center gap-5 rounded-2xl border border-[#d6b16a]/30 bg-white/[0.04] p-5">
-            <p className="font-display text-5xl leading-none font-semibold tracking-tight text-[#e0c084] sm:text-6xl">
+          <div className="reveal mt-8 flex items-center gap-5 rounded-2xl border border-brand-300/30 bg-white/[0.04] p-5">
+            <p className="font-display text-5xl leading-none font-semibold tracking-tight text-brand-300 sm:text-6xl">
               20+
             </p>
             <div className="border-l border-white/15 pl-5">
               <p className="flex items-center gap-2 font-semibold">
-                <CalendarCheck className="size-4 shrink-0 text-[#e0c084]" aria-hidden="true" />
+                <CalendarCheck className="size-4 shrink-0 text-brand-300" aria-hidden="true" />
                 Years of Market Experience
               </p>
               <p className="mt-1 text-sm text-white/65">
@@ -66,7 +66,7 @@ export function MarketExperience() {
           <ul className="reveal mt-5 grid gap-3 sm:grid-cols-2">
             {indicators.map(({ label, icon: Icon }) => (
               <li key={label} className="flex items-center gap-2.5 text-sm font-medium text-white/90">
-                <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-white/[0.06] text-[#e0c084]">
+                <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-white/[0.06] text-brand-300">
                   <Icon className="size-4" aria-hidden="true" />
                 </span>
                 {label}
@@ -92,11 +92,11 @@ export function MarketExperience() {
             {locations.map(({ city, title, text, icon: Icon }, i) => (
               <li
                 key={city}
-                className="reveal flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-[0_10px_30px_-18px_rgb(0_0_0/0.6)] transition-colors hover:border-[#d6b16a]/40 sm:p-6"
+                className="reveal flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-[0_10px_30px_-18px_rgb(0_0_0/0.6)] transition-colors hover:border-brand-300/40 sm:p-6"
                 style={revealDelay(i * 90)}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <p className="flex items-center gap-2 text-sm font-semibold text-[#e0c084]">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-brand-300">
                     <MapPin className="size-4 shrink-0" aria-hidden="true" />
                     {city}
                   </p>

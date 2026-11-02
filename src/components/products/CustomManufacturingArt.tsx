@@ -8,7 +8,7 @@ export function CustomManufacturingArt() {
   return (
     <div
       aria-hidden="true"
-      className="relative aspect-[4/3] overflow-hidden bg-navy-800 bg-[linear-gradient(to_right,rgb(255_255_255/0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/0.08)_1px,transparent_1px)] bg-[size:18px_18px]"
+      className="relative aspect-[4/3] overflow-hidden bg-navy-800 bg-[linear-gradient(to_right,rgb(197_164_109/0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgb(197_164_109/0.12)_1px,transparent_1px)] bg-[size:18px_18px]"
     >
       <div className="absolute inset-[16%] rounded-lg border-2 border-dashed border-brand-300/70" />
       <div className="absolute top-[9%] left-[16%] right-[16%] flex items-center gap-1 text-[10px] font-medium text-brand-200">

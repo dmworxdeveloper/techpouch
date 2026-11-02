@@ -90,7 +90,7 @@ function EmptyGallery({ productName }: { productName: string }) {
       {/* Subtle brand grid and corner marks so the frame reads as deliberate, not broken. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(31_85_240/0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgb(31_85_240/0.06)_1px,transparent_1px)] bg-[size:32px_32px]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(197_164_109/0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgb(197_164_109/0.10)_1px,transparent_1px)] bg-[size:32px_32px]"
       />
       <div aria-hidden="true" className="pointer-events-none absolute inset-5 rounded-2xl border border-dashed border-brand-200" />
       <span className="relative grid size-16 place-items-center rounded-2xl bg-white text-brand-600 shadow-soft ring-1 ring-line">

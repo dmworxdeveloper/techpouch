@@ -28,7 +28,7 @@ export function ProductImage({
       <div
         role="img"
         aria-label="Product photos coming soon"
-        className={`relative flex flex-col items-center justify-center gap-2 overflow-hidden bg-tint bg-[linear-gradient(to_right,rgb(31_85_240/0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgb(31_85_240/0.06)_1px,transparent_1px)] bg-[size:24px_24px] ${aspect} ${className}`}
+        className={`relative flex flex-col items-center justify-center gap-2 overflow-hidden bg-tint bg-[linear-gradient(to_right,rgb(197_164_109/0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgb(197_164_109/0.10)_1px,transparent_1px)] bg-[size:24px_24px] ${aspect} ${className}`}
       >
         <span className="grid size-11 place-items-center rounded-xl bg-white text-brand-600 shadow-soft ring-1 ring-line">
           <ImageIcon className="size-5" strokeWidth={1.75} aria-hidden="true" />
